@@ -74,7 +74,7 @@ function Header() {
       } 
 
     try {
-      const resultat = await axios.post('http://localhost/api/add_msg.php', data, {
+      const resultat = await axios.post('https://soc-net.info/api/add_msg.php', data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -164,7 +164,7 @@ function Header() {
     daa = {id_liker:res.data.response.id,id_post:id,id_liked:id_liked}; 
     // console.log(daa)
     try {
-      const like = await axios.post('http://localhost/api/addLike.php', daa, {
+      const like = await axios.post('https://soc-net.info/api/addLike.php', daa, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -182,7 +182,7 @@ function Header() {
     daa = {id_liker:res.data.response.id,id_post:id}; 
     // console.log(daa)
     try {
-      let yi = await axios.post('http://localhost/api/removeLike.php', daa, {
+      let yi = await axios.post('https://soc-net.info/api/removeLike.php', daa, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -224,7 +224,7 @@ function Header() {
       daa = {id_commented:id_commented,id_liker:res.data.response.id,id_post:id,content:value}; 
       if(daa!==null){
     try {
-      const like = await axios.post('http://localhost/api/addComment.php', daa, {
+      const like = await axios.post('https://soc-net.info/api/addComment.php', daa, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -246,7 +246,7 @@ function Header() {
   //   observer.observe(msg.current, config)
   // }
   try {
-    checkNewComment = await axios.post('http://localhost/api/checkNewComments.php', data, {
+    checkNewComment = await axios.post('https://soc-net.info/api/checkNewComments.php', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -270,7 +270,7 @@ function Header() {
       daa = {id_commented:id_commented,id_liker:res.data.response.id,id_post:id,content:value}; 
     if(daa!==null){
     try {
-      const like = await axios.post('http://localhost/api/addComment.php', daa, {
+      const like = await axios.post('https://soc-net.info/api/addComment.php', daa, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -306,7 +306,7 @@ function Header() {
       }
 
       try {
-        responses = await axios.post('http://localhost/api/addNewPost.php', dataa, {
+        responses = await axios.post('https://soc-net.info/api/addNewPost.php', dataa, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -327,7 +327,7 @@ function Header() {
     dat = {id:id_post};
     // console.log(dat)
       try {
-        const re = await axios.post('http://localhost/api/deletePost.php', dat, {
+        const re = await axios.post('https://soc-net.info/api/deletePost.php', dat, {
           headers: {
           'Content-Type': 'application/json',
           },
@@ -388,7 +388,7 @@ function Header() {
     data = { id_suiveur:res.response.data.id,id_suivi:res.data.response.id }; 
     }
     try {
-      const rds = await axios.post('http://localhost/api/unfollow.php', data, {
+      const rds = await axios.post('https://soc-net.info/api/unfollow.php', data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -439,7 +439,7 @@ function Header() {
     const data = { input: e.target.value }; 
 
       try {
-        const ras = await axios.post('http://localhost/api/searchUser.php', data, {
+        const ras = await axios.post('https://soc-net.info/api/searchUser.php', data, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -528,7 +528,7 @@ function Header() {
         const data = { email: localStorage.getItem("email") , input: username }; 
         // console.log(data)
         try {
-          res = await axios.post('http://localhost/api/getUserData.php', data, {
+          res = await axios.post('https://soc-net.info/api/getUserData.php', data, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -543,7 +543,7 @@ function Header() {
             let sa = 0
             const da = { email: localStorage.getItem("email") ,id:follower.id }; 
             try {
-              sa = await axios.post('http://localhost/api/checkFollow.php', da, {
+              sa = await axios.post('https://soc-net.info/api/checkFollow.php', da, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -561,7 +561,7 @@ function Header() {
             let sad = 0
             const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
             try {
-              sad = await axios.post('http://localhost/api/checkFollow.php', dad, {
+              sad = await axios.post('https://soc-net.info/api/checkFollow.php', dad, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -605,7 +605,7 @@ function Header() {
         const data = { email: localStorage.getItem("email") , input: username }; 
         // console.log(data)
         try {
-          resp = await axios.post('http://localhost/api/getUserData.php', data, {
+          resp = await axios.post('https://soc-net.info/api/getUserData.php', data, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -620,7 +620,7 @@ function Header() {
             let sa = 0
             const da = { email: localStorage.getItem("email") ,id:follower.id }; 
             try {
-              sa = await axios.post('http://localhost/api/checkFollow.php', da, {
+              sa = await axios.post('https://soc-net.info/api/checkFollow.php', da, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -638,7 +638,7 @@ function Header() {
             let sad = 0
             const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
             try {
-              sad = await axios.post('http://localhost/api/checkFollow.php', dad, {
+              sad = await axios.post('https://soc-net.info/api/checkFollow.php', dad, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -679,7 +679,7 @@ function Header() {
     // const getUserData = async (username) => {
     //   const data = { email: username }; 
     //   try {
-    //     res = await axios.post('http://localhost/api/getUserData.php', data, {
+    //     res = await axios.post('https://soc-net.info/api/getUserData.php', data, {
     //       headers: {
     //         'Content-Type': 'application/json',
     //       },
@@ -765,7 +765,7 @@ function Header() {
         }
         const fetch = async () => {
           try {
-            let newMessagess2 = await axios.post('http://localhost/api/checkNewMessage3.php', data, {
+            let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -879,7 +879,7 @@ function Header() {
         //   observer.observe(msg.current, config)
         // }
         try {
-          checkNewComment = await axios.post('http://localhost/api/checkNewComments.php', data, {
+          checkNewComment = await axios.post('https://soc-net.info/api/checkNewComments.php', data, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -959,7 +959,7 @@ function Header() {
         setVisibleOverlay(true)
         document.body.style.overflow = "hidden"
         try {
-            await axios.get('http://localhost/api/removeFlagOne.php', {
+            await axios.get('https://soc-net.info/api/removeFlagOne.php', {
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -1001,7 +1001,7 @@ function Header() {
         setVisibleOverlay(true)
         document.body.style.overflow = "hidden"
         try {
-          await axios.get('http://localhost/api/removeFlagTwo.php', {
+          await axios.get('https://soc-net.info/api/removeFlagTwo.php', {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -1030,7 +1030,7 @@ function Header() {
 
           }else{
       try {
-        const response = await axios.post('http://localhost/api/updateProfile.php', formData, {
+        const response = await axios.post('https://soc-net.info/api/updateProfile.php', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -1069,7 +1069,7 @@ function Header() {
           (async () => {
             const data = { email: localStorage.getItem("email"),id:res.data.response.id };
             try {
-               const rsa = await axios.post('http://localhost/api/getUsers.php', data, {
+               const rsa = await axios.post('https://soc-net.info/api/getUsers.php', data, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -1098,7 +1098,7 @@ function Header() {
             };
     
             // Fetch notifications
-            const notigp = await axios.post('http://localhost/api/getNotifications.php', data, {
+            const notigp = await axios.post('https://soc-net.info/api/getNotifications.php', data, {
               headers: { 'Content-Type': 'application/json' }
             });
     
@@ -1134,7 +1134,7 @@ function Header() {
             };
       
             // Fetch messages
-            const notgp = await axios.post('http://localhost/api/getMessages.php', data, {
+            const notgp = await axios.post('https://soc-net.info/api/getMessages.php', data, {
               headers: { 'Content-Type': 'application/json' }
             });
             setNotgp(notgp.data);
@@ -1156,7 +1156,7 @@ function Header() {
             };
       
             // Fetch new messages
-            const notgp = await axios.post('http://localhost/api/getMessages.php', data, {
+            const notgp = await axios.post('https://soc-net.info/api/getMessages.php', data, {
               headers: { 'Content-Type': 'application/json' }
             });
             setNotgp(notgp.data);
@@ -1556,7 +1556,7 @@ up.current.style.display='none'
     const follow = async (e,id) => {
         const data = { id_suiveur: res.data.response.id,id_suivi:id }; 
         try {
-          const rds = await axios.post('http://localhost/api/follow.php', data, {
+          const rds = await axios.post('https://soc-net.info/api/follow.php', data, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -1582,7 +1582,7 @@ up.current.style.display='none'
             let data = {id:rees.data.response.id}; 
             // console.log(data)
             try {
-              rresponses = await axios.post('http://localhost/api/posts.php', data, {
+              rresponses = await axios.post('https://soc-net.info/api/posts.php', data, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -1616,7 +1616,7 @@ up.current.style.display='none'
             let data = {id:rees.data.response.id}; 
             // console.log(data)
             try {
-              rresponses = await axios.post('http://localhost/api/retrievePosts.php', data, {
+              rresponses = await axios.post('https://soc-net.info/api/retrievePosts.php', data, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -1686,7 +1686,7 @@ up.current.style.display='none'
     const data = { id_exp: res.data.response.id }; 
     const checkNewMessagess = setInterval(async () => {
       try {
-        const response = await axios.post('http://localhost/api/checkNewMessages2.php', data, {
+        const response = await axios.post('https://soc-net.info/api/checkNewMessages2.php', data, {
           headers: {
             'Content-Type': 'application/json',
           },
