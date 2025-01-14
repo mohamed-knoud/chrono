@@ -2148,7 +2148,7 @@ upsd.current.style.display='none'
           return(
             <div style={{display:'none'}} className={`allp comments boxC_${item.id_post}`} key={item.id_post}>
                 <div className='postg'>
-                  <div style={{width: '65%', height: '100%', overflow: 'hidden', position: 'relative'}}><img style={{width: '100%', height: '100%', position: 'absolute'}} src={`https://soc-net.info/${item.photo}`}/></div>
+                  <div style={{width: '65%', height: '100%', overflow: 'hidden', position: 'relative'}}><img style={{width: '100%', height: '100%', position: 'absolute'}} src={`https://soc-net.info/api/${item.photo}`}/></div>
                   <div style={{width:'35%',height: '100%',backgroundColor:'white',padding:'10px'}}>
                     <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                       <div style={{display:'flex',alignItems:'center'}}>
