@@ -1656,7 +1656,7 @@ upsd.current.style.display='none'
     width: '35px',
     verticalAlign: 'middle',
     borderRadius: '50%'
-}} src={`https://soc-net.info/${item.profile_pic}`} alt="Profile" />
+}} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
 }
 
         <div>
@@ -1691,7 +1691,7 @@ upsd.current.style.display='none'
             width: '35px',
             verticalAlign: 'middle',
             borderRadius: '50%'
-        }} src={`https://soc-net.info/${item.profile_pic}`} alt="Profile" />
+        }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
         }
         <div>
           <p onClick={()=>openPost2(item.username)} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
