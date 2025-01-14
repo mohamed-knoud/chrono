@@ -1179,7 +1179,7 @@ function Header() {
       // Log notig when it changes
       useEffect(() => {
         if (notig !== null) {
-          // console.log('Updated notifications:', notig);
+          console.log('Updated notifications:', notig);
         }
       }, [notig]); // This will run every time notig state is updated
       useEffect(() => {
