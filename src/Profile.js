@@ -1629,7 +1629,7 @@ upsd.current.style.display='none'
           
                 {!formData.image && <i ref={popup} id="profile" className="dropbtn fa-solid fa-user"></i>}
                 {true && <div ref={upsd} style={{display:'none'}} className="dropdown-content">
-                    <div ref={upps} onClick={() => {setProfile(!profile);setEdtTrue(!edt);}}><i className="fa-solid fa-address-book"></i>My Profile</div>               
+                    <div ref={upps} onClick={() => {setProfile(true);setEdtTrue(!edt);}}><i className="fa-solid fa-address-book"></i>My Profile</div>               
                     <div ref={ups}  onClick={() => {setProfile2(!profile2);setEditTrue(!edit)}}><i className="fa-solid fa-pen-to-square"></i>Edit Profile</div>
                     <hr/>
                     <Link ref={log} style={{color:'black'}} to='/'><div><i className="fa-solid fa-right-from-bracket"></i>Logout</div></Link>
