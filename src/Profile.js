@@ -86,13 +86,13 @@ const getUserDataak = async (username) => {
     
     setFormData(prevState => ({
       ...prevState,
-      e_mail: res.data.response.email,
-      firstName: res.data.response.first_name,
-      gender: res.data.response.gender,
-      lastName: res.data.response.last_name,
-      username: res.data.response.username,
-      id:res.data.response.id,
-      image:res.data.response.image
+      e_mail: resp.data.response.email,
+      firstName: resp.data.response.first_name,
+      gender: resp.data.response.gender,
+      lastName: resp.data.response.last_name,
+      username: resp.data.response.username,
+      id:resp.data.response.id,
+      image:resp.data.response.image
     }));
   } catch (error) {
     console.error('Error:', error);
