@@ -84,16 +84,16 @@ const getUserDataak = async (username) => {
       setImage2(false)
     }
     
-    // setFormData(prevState => ({
-    //   ...prevState,
-    //   e_mail: res.data.response.email,
-    //   firstName: res.data.response.first_name,
-    //   gender: res.data.response.gender,
-    //   lastName: res.data.response.last_name,
-    //   username: res.data.response.username,
-    //   id:res.data.response.id,
-    //   image:res.data.response.image
-    // }));
+    setFormData(prevState => ({
+      ...prevState,
+      e_mail: res.data.response.email,
+      firstName: res.data.response.first_name,
+      gender: res.data.response.gender,
+      lastName: res.data.response.last_name,
+      username: res.data.response.username,
+      id:res.data.response.id,
+      image:res.data.response.image
+    }));
   } catch (error) {
     console.error('Error:', error);
   }
@@ -597,7 +597,7 @@ const getUserDataak = async (username) => {
       useEffect(() => {
 
         (async () => {
-            // let rees = await getUserDataa(localStorage.getItem("email")); 
+            // let rees = await getUserDataak(localStorage.getItem("email")); 
             let rees = await getUserDataa(username);  
 
             // console.log(rees)
@@ -634,7 +634,7 @@ const getUserDataak = async (username) => {
       useEffect(() => {
 
         (async () => {
-            let rees = await getUserDataa(localStorage.getItem("email"));  
+            let rees = await getUserDataak(localStorage.getItem("email"));  
             // console.log(rees)
             let data = {id:rees.data.response.id}; 
             // console.log(data)
@@ -1525,7 +1525,7 @@ upsd.current.style.display='none'
       const fetchData = async () => {
         try {
           // Fetch user data
-          const res = await getUserDataa(localStorage.getItem("email"));
+          const res = await getUserDataak(localStorage.getItem("email"));
           const data = { 
             email: localStorage.getItem("email"), 
             id: res.data.response.id 
