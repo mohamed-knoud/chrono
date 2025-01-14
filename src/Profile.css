@@ -575,6 +575,14 @@ button.unblock{
 #manque{
   margin-top:20px;
 }
+.put{
+    width:90%;
+    height:auto;
+    border:1px solid #ced4da;
+    font-size:1.2em;
+    padding:5px;
+    margin:0 20px 10px; 
+  }
 @media only screen and (max-width: 400px) {
   .dropdown-contenp{
     top:30px;
@@ -598,14 +606,7 @@ button.unblock{
   #kol{
     margin: auto;
   }
-  .put{
-    width:90%;
-    height:auto;
-    border:1px solid #ced4da;
-    font-size:1.2em;
-    padding:5px;
-    margin:0 20px 10px; 
-  }
+  
   .maroc{
     width:100%;
   }
