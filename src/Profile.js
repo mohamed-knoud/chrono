@@ -1612,7 +1612,7 @@ upsd.current.style.display='none'
             </div>
             <div className="dropdown">
             {!image2 && formData.image && <img ref={popup4}
-            src={`https://soc-net.info/uploads/${formData.image}`} 
+            src={`https://soc-net.info/api/${formData.image}`} 
             alt="Preview" 
             style={{ marginLeft:'7px',marginBottom:'6px',maxWidth: '100%',marginRight:'15px', height: '35px' ,width:'35px',verticalAlign:'middle',borderRadius:'50%'}} 
           />}
