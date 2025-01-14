@@ -2198,7 +2198,7 @@ up.current.style.display='none'
         </div>)})}
 {!edit && !profile2 && profile && <div id="kol">
       <div id="pol">
-      {!image2 && formDataa.imagea && (<img 
+      {!image2 && formData.image && (<img 
             src={`https://soc-net.info/api/${formData.image}`} 
             alt="Preview" 
             id="image30" 
