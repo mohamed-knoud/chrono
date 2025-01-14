@@ -1781,7 +1781,7 @@ upsd.current.style.display='none'
       <div id="pol">
 
       {!image2 && formDataa.imagea && (<img 
-            src={`https://soc-net.info/${formDataa.imagea}`} 
+            src={`https://soc-net.info/api/${formDataa.imagea}`} 
             alt="Preview" 
             id="image30" 
           />)}
@@ -2127,7 +2127,7 @@ upsd.current.style.display='none'
             
             <img 
                 onClick={()=>openComments(item.id_post)}
-                src={`https://soc-net.info/${item.photo}`} 
+                src={`https://soc-net.info/api/${item.photo}`} 
                 alt="Preview" 
                 style={{
                     // marginLeft: '1px',
