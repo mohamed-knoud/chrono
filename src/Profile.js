@@ -1009,7 +1009,10 @@ const getUserDataak = async (username) => {
 
     
     };
-    
+    useEffect(() => {
+      document.body.style.overflow='unset'
+    // cons:ole.log(`Count changed: ${count}`);
+  }, []); // Runs when `count` changes
     useEffect(() => {
    
       (async () => {
