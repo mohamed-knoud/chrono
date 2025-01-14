@@ -275,11 +275,12 @@ function Header() {
           'Content-Type': 'application/json',
         },
       });
-      if(like.data===1){
-        window.location.href = `?target=send_${id}`
-        // console.log('df')
-        // window.location.reload();
-      }
+      console.log(like)
+      // if(like.data===1){
+      //   window.location.href = `?target=send_${id}`
+      //   // console.log('df')
+      //   // window.location.reload();
+      // }
       } catch (error) {
         console.error('Error:', error);
       }
