@@ -1855,7 +1855,7 @@ upsd.current.style.display='none'
       {!loader2 && newMessagess!==null && newMessagess.data.map((item,index) => {
           return (
             rs.data.response.id === item.id_dest ? 
-              <div key={index} id={item.id} style={{fontSize:'0.9em',alignSelf:'flex-end',width:'60%',color:'white',borderRadius:'5px',margin:'10px 10px',padding:'10px',backgroundColor:'#0c6dfd'}}><span>{item.content}</span><br/>
+              <div key={index} id={item.id} style={{wordWrap:'break-word',fontSize:'0.9em',alignSelf:'flex-end',width:'60%',color:'white',borderRadius:'5px',margin:'10px 10px',padding:'10px',backgroundColor:'#0c6dfd'}}><span>{item.content}</span><br/>
               <span>{item.moment}</span>
               </div> :
               <div key={index} id={item.id} style={{fontSize:'0.9em',alignSelf:'flex-start',width:'60%',color:'black',borderRadius:'5px',margin:'10px 10px',padding:'10px',border:'1px solid rgba(0,0,0,0.5)',backgroundColor:'#FFF'}}><span>{item.content}</span><br/>
