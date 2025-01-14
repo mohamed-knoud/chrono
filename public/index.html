@@ -33,11 +33,12 @@
             // Create a URL object
             const url = new URL(currentUrl);
             // Get the value of the 'target' parameter
+            console.log(url)
             const targetValue = url.searchParams.get('target');
             if (targetValue) {
               // Select the element with the id matching the targetValue
               const targetElement = document.getElementById(targetValue);
-
+              
               if (targetElement) {
                   // Scroll to the element
                   targetElement.scrollIntoView({
