@@ -1845,7 +1845,7 @@ upsd.current.style.display='none'
           <span style={{fontSize:'2em'}}>{formData.firstName} {formData.lastName}</span>
           <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formData.username}</span>
           <div style={{marginTop:'20px'}}>
-          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{rs && rs.data.response.n_posts} {res && res.data.response.n_posts} Posts</button>
+          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{res && res.data.response.n_posts} Posts</button>
           <button onClick={()=>{openFollowers2();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{rs && rs.data.response.num_of_followers} Followers</button>
           <button onClick={()=>{openFollowing2();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{rs && rs.data.response.num_of_following} Following</button>
 
