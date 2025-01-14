@@ -2214,11 +2214,8 @@ up.current.style.display='none'
           <div style={{display:'flex',width:'100%',justifyContent:'space-between',alignItems:'center'}}><span style={{fontSize:'2em'}}>{formDataa.firstNamea} {formDataa.lastNamea}</span>
 
 
-          <div style={{position:'relative',display:'flex',flexDirection:'column'}}>{res && res.data.response.blocked2===0 && rs && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && <i onClick={()=>setDrop(!drop)} ref={dr} style={{fontSize:'2em'}} className="fa-solid fa-ellipsis"></i>}
-          {drop && <div ref={dro} className="dropdown-contenp">
-                    <div onClick={()=>{openPost2();setDrop(false);}}><i className="fa-solid fa-message"></i><span>Message</span></div>               
-                    <div onClick={()=>block()}><i style={{marginLeft:'4px',display:'inline-block'}} className="fa-solid fa-x"></i><span>Block</span></div>
-                </div>}</div>
+          <div style={{position:'relative',display:'flex',flexDirection:'column'}}>{res && res.data.response.blocked2===0 && rs && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && <i onClick={()=>setDrop(!drop)} style={{fontSize:'2em'}} className="fa-solid fa-ellipsis"></i>}
+          </div>
           </div>
           <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formDataa.usernamea}</span>
           {res && res.data.response.blocked2===0 && res.data.response.blocked!==1 && <div id="manque">
@@ -2226,22 +2223,7 @@ up.current.style.display='none'
           <button onClick={()=>{openFollowers();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{res && res.data.response.num_of_followers} Followers</button>
           <button onClick={()=>{openFollowing();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{res && res.data.response.num_of_following} Following</button>
           </div>}
-          {
-            res && rs && res.data.response.blocked2===0 && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && 
-            <>
-            {res && res.data.response.blocked2===0 &&res.data.response.number===0 && <button onClick={(e,id)=>follow(e,res.data.response.id)} className='follo'>Follow</button>}
-            {res && res.data.response.blocked2===0 &&res.data.response.number>0 && <button onClick={(e)=>unfollow(e,res.data.response.id)} className='unfollo'>Unfollow</button>}
-            </>
-          }
-
-          {
-            res && res.data.response.blocked2===0 && res.data.response.blocked!==0 &&  
-            <button onClick={()=>unblock()} className='unblock'>Unblock</button>
-          }
-          {
-            res && res.data.response.blocked2!==0 &&  
-            <span style={{marginTop:'10px',border:'1px solid rgba(150, 1, 1,0.3)',padding:'15px 10px',fontSize:'1.1em',borderRadius:'5px',color:'rgb(150, 1, 1)',backgroundColor:'rgba(235,80,80,0.5)'}}>@{formDataa.usernamea} blocked you !</span>
-          }
+          
           
         </div>
         </div>
