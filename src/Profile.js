@@ -188,10 +188,10 @@ const getUserDataak = async (username) => {
     // If you want to poll for new messages after that, you can still set up the interval
     const checkNew = setInterval(async () => {
       try {
-        // const resl = await getUserDataak(email);
+        const resln = await getUserDataak(email);
   
         const data = { 
-          id: resl.data.response.id 
+          id: resln.data.response.id 
         };
   
         // Fetch new messages
