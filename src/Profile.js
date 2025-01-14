@@ -1736,7 +1736,7 @@ upsd.current.style.display='none'
       <p style={{padding:'10px 20px',fontSize:'1.1em',fontWeight:'400'}}>Change Profile Picture</p>
 
       <input accept="image/*"
-        onChange={handleFileChange2} id="put" style={{height:'auto',width:'40%',border:'1px solid #ced4da',fontSize:'1.2em',padding:'5px',margin:'0px 20px',marginBottom:'10px'}} type="file"/><br/>
+        onChange={handleFileChange2} className="put" type="file"/><br/>
 
       <input value={formData.firstName} onChange={handleChange1} placeholder='first name' style={{margin:'15px 10px 0px 20px',height:'50px',width:'45%'}} type="text" name="firstName"/>
       
@@ -1772,7 +1772,7 @@ upsd.current.style.display='none'
         </div>
       )}
       <input accept="image/*" 
-        onChange={handleFileChange} id="put" style={{height:'auto',width:'100%',border:'1px solid #ced4da',fontSize:'1.2em',padding:'5px',marginBottom:'10px'}} type="file"/><br/>
+        onChange={handleFileChange} className="put" type="file"/><br/>
       <label htmlFor="say">Say Something</label><br/>
       <input style={{height:'35px',padding:'5px',width:'100%',marginTop:'10px',marginBottom:'10px'}} type="text" name="say" id="say"/><br/>
       <input type="submit" value="Post" style={{padding:'10px',color:'white',backgroundColor:'#0b5ed7'}}/>
