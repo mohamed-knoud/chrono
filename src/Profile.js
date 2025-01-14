@@ -1849,7 +1849,7 @@ upsd.current.style.display='none'
                 <hr style={{width:'100%',opacity:'0.4'}}/>
 
     
-    <form ref={form} style={{height:'90%',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
+    <form ref={form} style={{height:'90%',overflowX:'hidden',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
       <div ref={msg} style={{position:'relative',zIndex:'1',overflowY:'scroll',height:'100%',width:'100%',display:'flex',flexDirection:'column',alignSelf:'flex-start'}}>
        {loader2 && <div className="loader"></div>}
       {!loader2 && newMessagess!==null && newMessagess.data.map((item,index) => {
