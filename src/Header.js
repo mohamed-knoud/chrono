@@ -2198,9 +2198,8 @@ up.current.style.display='none'
         </div>)})}
 {!edit && !profile2 && profile && <div id="kol">
       <div id="pol">
-
       {!image2 && formDataa.imagea && (<img 
-            src={`https://soc-net.info/api/${formDataa.imagea}`} 
+            src={`https://soc-net.info/api/${formData.image}`} 
             alt="Preview" 
             id="image30" 
           />)}
@@ -2209,15 +2208,15 @@ up.current.style.display='none'
             alt="Preview" 
             id="image30" 
           />)}
-          {!formDataa.imagea && <i id="profile30" style={{marginRight:'15px'}} className="dropbtn fa-solid fa-user"></i>}
+          {!formData.image && <i id="profile30" style={{marginRight:'15px'}} className="dropbtn fa-solid fa-user"></i>}
         <div id="alg">
-          <div style={{display:'flex',width:'100%',justifyContent:'space-between',alignItems:'center'}}><span style={{fontSize:'2em'}}>{formDataa.firstNamea} {formDataa.lastNamea}</span>
+          <div style={{display:'flex',width:'100%',justifyContent:'space-between',alignItems:'center'}}><span style={{fontSize:'2em'}}>{formData.firstName} {formData.lastName}</span>
 
 
           <div style={{position:'relative',display:'flex',flexDirection:'column'}}>{res && res.data.response.blocked2===0 && rs && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && <i onClick={()=>setDrop(!drop)} style={{fontSize:'2em'}} className="fa-solid fa-ellipsis"></i>}
           </div>
           </div>
-          <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formDataa.usernamea}</span>
+          <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formData.username}</span>
           {res && res.data.response.blocked2===0 && res.data.response.blocked!==1 && <div id="manque">
     <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{res && res.data.response.n_posts} Posts</button>
           <button onClick={()=>{openFollowers();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{res && res.data.response.num_of_followers} Followers</button>
