@@ -1808,7 +1808,7 @@ upsd.current.style.display='none'
           {res && res.data.response.blocked2===0 && res.data.response.blocked!==1 && <div id="manque">
     <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{res && res.data.response.n_posts} Posts</button>
           <button onClick={()=>{openFollowers();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{res && res.data.response.num_of_followers} Followers</button>
-          <button onClick={()=>{openFollowing();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{res && res.data.response.num_of_following} Following</button>
+          <button onClick={()=>{openFollowing();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{res && res.data.response.num_of_following} aaaFollowing</button>
           </div>}
           {
             res && rs && res.data.response.blocked2===0 && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && 
