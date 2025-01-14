@@ -2148,8 +2148,8 @@ upsd.current.style.display='none'
           return(
             <div style={{display:'none'}} className={`allp comments boxC_${item.id_post}`} key={item.id_post}>
                 <div className='postg'>
-                  <div style={{width: '65%', height: '100%', overflow: 'hidden', position: 'relative'}}><img style={{width: '100%', height: '100%', position: 'absolute'}} src={`https://soc-net.info/api/${item.photo}`}/></div>
-                  <div style={{width:'35%',height: '100%',backgroundColor:'white',padding:'10px'}}>
+                  <div className='maroc'><img src={`https://soc-net.info/api/${item.photo}`}/></div>
+                  <div className="senegal">
                     <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                       <div style={{display:'flex',alignItems:'center'}}>
                       {item.profile_pic==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
@@ -2182,62 +2182,8 @@ upsd.current.style.display='none'
 
                     </div>
                     <hr style={{opacity:'0.5',width:'100%'}}/>
-                    <div style={{display:'flex',flexDirection:'column',maxHeight:'100%',height:'76%',overflowY:'scroll'}}>
-{/* {isArrayOfArrays(checkNewComments)? checkNewComments[index] && checkNewComments[index].length!==0 && checkNewComments[index].map((itm,index)=>{
-return(
-  <>
-                      <div key={index} id={index} style={{display:'flex'}}>
-                      {itm.image==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
-            {itm.image!=null && <img 
-                src={`https://soc-net.info/${itm.image}`} 
-                alt="Preview" 
-                style={{
-                    marginLeft: '1px',
-                    marginBottom: '6px',
-                    maxWidth: '100%',
-                    marginRight: '5px',
-                    height: '45px',
-                    width: '45px',
-                    verticalAlign: 'middle',
-                    borderRadius: '50%'
-                }} 
-            />}
-                        <div style={{marginLeft:'10px'}}>
-                          <span style={{fontWeight:'700',color:'rgba(0,0,0,0.5)'}}>@{itm.username}</span> - <span style={{fontWeight:'500',fontSize:'0.9em'}}>{itm.content}</span><br/>
-                          <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.5)'}}>({itm.formatted_time})</span>
-                        </div>
-                      </div>
-                      </>
-)}
-) 
-:checkNewComments.data && checkNewComments.data.length!==0 && checkNewComments.data.map((itm,index)=>{
-  return(
-    <>
-                        <div key={index} id={index} style={{display:'flex'}}>
-                        {itm.image==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
-              {itm.image!=null && <img 
-                  src={`https://soc-net.info/${itm.image}`} 
-                  alt="Preview" 
-                  style={{
-                      marginLeft: '1px',
-                      marginBottom: '6px',
-                      maxWidth: '100%',
-                      marginRight: '5px',
-                      height: '45px',
-                      width: '45px',
-                      verticalAlign: 'middle',
-                      borderRadius: '50%'
-                  }} 
-              />}
-                          <div style={{marginLeft:'10px'}}>
-                            <span style={{fontWeight:'700',color:'rgba(0,0,0,0.5)'}}>@{itm.username}</span> - <span style={{fontWeight:'500',fontSize:'0.9em'}}>{itm.content}</span><br/>
-                            <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.5)'}}>({itm.formatted_time})</span>
-                          </div>
-                        </div>
-                        </>
-  )}
-  ) 
-  } */}
+                    <div className="france">
+
        <Comments trigger={trigger} checkNewComments={checkNewComments} />
 
                     </div>
