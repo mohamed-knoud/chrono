@@ -232,7 +232,7 @@ function Header() {
       console.log(like)
       if(like.data===1){
         window.location.href = `#comment_${id}`
-        window.location.reload();
+        // window.location.reload();
       }
   } catch (error) {
     console.error('Error:', error);
