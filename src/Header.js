@@ -1735,7 +1735,7 @@ up.current.style.display='none'
 
     
     <form ref={form} style={{height:'90%',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
-      <div ref={msg} style={{position:'relative',zIndex:'1',overflowY:'scroll',height:'100%',width:'100%',display:'flex',flexDirection:'column',alignSelf:'flex-start'}}>
+      <div ref={msg} style={{overflowX:'hidden',wordWrap:'break-word',position:'relative',zIndex:'1',overflowY:'scroll',height:'100%',width:'100%',display:'flex',flexDirection:'column',alignSelf:'flex-start'}}>
       {loader2 && <div className="loader"></div>}
       {!loader2 && newMessagess.length > 0 && newMessagess.map((item, index) => {
   return (
