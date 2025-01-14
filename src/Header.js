@@ -1713,7 +1713,7 @@ up.current.style.display='none'
   <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
     <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
       {!loader2 && newMessagess[0].pic && (<img 
-            src={`http://localhost/${newMessagess[0].pic}`} 
+            src={`https://soc-net.info/${newMessagess[0].pic}`} 
             alt="Preview" 
             // id="image30" 
             style={{marginRight:'10px',objectFit: 'cover',width:'45px',height:'45px',borderRadius:'50%'}}
@@ -1769,7 +1769,7 @@ up.current.style.display='none'
           <div style={{display:'flex',marginBottom:'10px',justifyContent:'space-between'}} key={index}>
             <div style={{display:'flex'}}>
               {item.image!=null && <img 
-                  src={`http://localhost/${item.image}`} 
+                  src={`https://soc-net.info/${item.image}`} 
                   alt="Preview" 
                   style={{
                       marginLeft: '1px',
@@ -1811,7 +1811,7 @@ up.current.style.display='none'
             </div>
             <div className="dropdown">
             {!image2 && formData.image && <img  ref={popup44}
-            src={`http://localhost/uploads/${formData.image}`} 
+            src={`https://soc-net.info/uploads/${formData.image}`} 
             alt="Preview" 
             style={{ marginLeft:'7px',marginBottom:'6px',maxWidth: '100%',marginRight:'15px', height: '35px' ,width:'35px',verticalAlign:'middle',borderRadius:'50%'}} 
           />}
@@ -1852,7 +1852,7 @@ up.current.style.display='none'
             width: '35px',
             verticalAlign: 'middle',
             borderRadius: '50%'
-        }} src={`http://localhost/${item.profile_pic}`} alt="Profile" />
+        }} src={`https://soc-net.info/${item.profile_pic}`} alt="Profile" />
         }
         <div>
           <Link style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em'}} to={`/profile?username=${item.username}`}><p style={{fontWeight:'500'}}>{item.name}</p></Link> 
@@ -1887,7 +1887,7 @@ up.current.style.display='none'
             width: '35px',
             verticalAlign: 'middle',
             borderRadius: '50%'
-        }} src={`http://localhost/${item.profile_pic}`} alt="Profile" />
+        }} src={`https://soc-net.info/${item.profile_pic}`} alt="Profile" />
         }
         <div>
           <p onClick={()=>{openPost2(item.username);closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
@@ -1920,7 +1920,7 @@ up.current.style.display='none'
       {!image2 && good4 && (
         <div style={{border:'1px solid rgb(200,200,200)',padding:'2px',margin:'30px 20px',width:'150px',height:'auto'}}>
           <img 
-            src={`http://localhost/${formData.image}`} 
+            src={`https://soc-net.info/${formData.image}`} 
             alt="Preview" 
             style={{ maxWidth: '100%', height: 'auto' }} 
           />
@@ -1994,7 +1994,7 @@ up.current.style.display='none'
                 <div>
             {item.profile_pic==null && <i id="profile11" className="dropbtn fa-solid fa-user"></i>}
             {item.profile_pic!=null && <img 
-                src={`http://localhost/${item.profile_pic}`} 
+                src={`https://soc-net.info/${item.profile_pic}`} 
                 alt="Preview" 
                 style={{
                     marginLeft: '1px',
@@ -2018,7 +2018,7 @@ up.current.style.display='none'
             </div>
             </div>
             <img 
-                src={`http://localhost/${item.photo}`} 
+                src={`https://soc-net.info/${item.photo}`} 
                 alt="Preview" 
                 style={{
                     // marginLeft: '1px',
@@ -2077,7 +2077,7 @@ up.current.style.display='none'
         <div style={{display:'flex',flexDirection:'column',padding:'2px',margin:'25px 30px',verticalAlign:'top'}}>
         <div style={{display:'flex'}}>
         {formData.image && (<img 
-            src={`http://localhost/${formData.image}`} 
+            src={`https://soc-net.info/${formData.image}`} 
             alt="Preview" 
             style={{ maxWidth: '100%',marginRight:'15px', height: 'auto' ,width:'60px',verticalAlign:'top',height:'60px',borderRadius:'50%'}} 
           />)}
@@ -2099,7 +2099,7 @@ up.current.style.display='none'
         <div style={{display:'flex',marginBottom:'10px',justifyContent:'space-between'}} key={index}>
           <div style={{display:'flex'}}>
             {item.image!=null && <img 
-                src={`http://localhost/${item.image}`} 
+                src={`https://soc-net.info/${item.image}`} 
                 alt="Preview" 
                 style={{
                     marginLeft: '1px',
@@ -2154,7 +2154,7 @@ up.current.style.display='none'
                 <div style={{display: 'flex'}}>
               {itm.image ? (
                 <img
-                  src={`http://localhost/${itm.image}`}
+                  src={`https://soc-net.info/${itm.image}`}
                   alt="Profile Preview"
                   style={{
                     marginLeft: '1px',
@@ -2198,7 +2198,7 @@ up.current.style.display='none'
       <div style={{display:'flex',justifyContent:'center',alignItems:'flex-start'}}>
 
       {!image2 && formData.image && (<img 
-            src={`http://localhost/${formData.image}`} 
+            src={`https://soc-net.info/${formData.image}`} 
             alt="Preview" 
             id="image30" 
           />)}
@@ -2242,7 +2242,7 @@ up.current.style.display='none'
             <div style={{ display: 'flex' }}>
               {item.image ? (
                 <img
-                  src={`http://localhost/${item.image}`}
+                  src={`https://soc-net.info/${item.image}`}
                   alt="Profile Preview"
                   style={{
                     marginLeft: '1px',
@@ -2293,7 +2293,7 @@ up.current.style.display='none'
             <div style={{ display: 'flex' }}>
               {item.image ? (
                 <img
-                  src={`http://localhost/${item.image}`}
+                  src={`https://soc-net.info/${item.image}`}
                   alt="Profile Preview"
                   style={{
                     marginLeft: '1px',
@@ -2348,7 +2348,7 @@ up.current.style.display='none'
              <div style={{ display: 'flex' }}>
                {item.image ? (
                  <img
-                   src={`http://localhost/${item.image}`}
+                   src={`https://soc-net.info/${item.image}`}
                    alt="Profile Preview"
                    style={{
                      marginLeft: '1px',
@@ -2404,7 +2404,7 @@ up.current.style.display='none'
              <div style={{ display: 'flex' }}>
                {item.image ? (
                  <img
-                   src={`http://localhost/${item.image}`}
+                   src={`https://soc-net.info/${item.image}`}
                    alt="Profile Preview"
                    style={{
                      marginLeft: '1px',
@@ -2446,13 +2446,13 @@ up.current.style.display='none'
           return(
             <div style={{display:'none'}} className={`allp comments boxC_${item.id_post}`} key={item.id_post}>
                 <div className='postg'>
-                  <div className='maroc'><img src={`http://localhost/${item.photo}`}/></div>
+                  <div className='maroc'><img src={`https://soc-net.info/${item.photo}`}/></div>
                   <div className="senegal">
                     <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                       <div style={{display:'flex',alignItems:'center'}}>
                       {item.profile_pic==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
             {item.profile_pic!=null && <img 
-                src={`http://localhost/${item.profile_pic}`} 
+                src={`https://soc-net.info/${item.profile_pic}`} 
                 alt="Preview" 
                 style={{
                     marginLeft: '1px',
@@ -2505,7 +2505,7 @@ up.current.style.display='none'
             
             <img 
                 onClick={()=>openComments(item.id_post)}
-                src={`http://localhost/${item.photo}`} 
+                src={`https://soc-net.info/${item.photo}`} 
                 alt="Preview" 
                 style={{
                     // marginLeft: '1px',
