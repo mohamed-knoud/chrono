@@ -108,7 +108,7 @@ function Home() {
             <input value={code} onChange={handleChange} style={{width:'90%',margin:'10px 20px'}} type="text" placeholder='######' name='code'/><br/>
             {good && !good1 && !good12 && <span style={{margin:'20px 20px',fontSize:'1.1em',color:'green',fontWeight:'400'}}>Verification code sended !</span>}
             {good12 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(177, 7, 72)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>enter 6 digit code !</span>}
-            {!good && !good1 && <div className="loader"></div>}
+            {!good && !good1 && <div className="loadr"></div>}
             {good1 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(243, 10, 100)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>incorrect verifictaion code !</span>}
             <div style={{margin:'10px 20px',display:'flex',alignItems:'center',justifyContent:'space-between'}}><input style={{padding:'5px 10px',backgroundColor:'#0b5ed7',color:'white',borderRadius:'5px'}} type="submit" value="Verify Email" name="sign"/><span onClick={handleClick} style={{textDecoration:'none',color:'rgb(74, 139, 252)',cursor:'pointer'}}>Resend Code</span></div>
             <Link style={{margin:'10px 20px'}} to="/"><i style={{marginRight:'5px'}} className="fa-solid fa-circle-arrow-left"></i>Logout</Link>
@@ -118,3 +118,31 @@ function Home() {
 }
 
 export default Home
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

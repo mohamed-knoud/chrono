@@ -6,29 +6,116 @@ import { useLocation } from 'react-router-dom';
 import Comments from './Comments';
 import axios from 'axios';
 let res 
+let resl = null
+
 let rs
 let rresponses = null
 let likesElemeents = null
 // const [lik, setLik] = useState(true);
+let newMessagess = null
+let newMessageshs = null
+let checkNewMessages2 = null
 let lik 
+let notigp = null
 // let loader = true 
+// let loader2 = false 
+let checkNewMessages = null
+
 let checkNewCommennt
 // let checkNewComments = []
+
+let responses 
 let checkNewComment = []
 const regex = /^del_[0-9]+/;
 let queryParams 
+
 function Header() {
+  const [username, setUsername] = useState("");
   const [trigger, setTrigger] = useState(false);
+  // const [newMessages, setNewMessages] = useState(null);
 
+  let [newMessagess, setNewMessagess] = useState([]);
+  const [loader2, setLoader2] = useState(false); // Define loader2 state
+
+      const [viss,setViss] = useState(false)
+        // const [newMessages, setNewMessages] = useState(null);
+    const form = useRef(null);
   const [checkNewComments, setCheckNewComments] = useState([]);
-
+        const msg = useRef(null);
+        const config = {
+          childList: true,
+          attributes: true,
+          subtree: true,
+          characterData: true
+      };
+      // let [newMessagess, setNewMessagess] = useState(null); // State for new messages
+      // let [loader2, setLoader2] = useState(true); // Assuming you want to manage loader state
+      // const msg = useRef(null);
+      // useEffect(() => {
+      //   // console.log(res,rs,nbr)
+        
+      //   // Cleanup function to clear the interval when the component unmounts or when dependencies change
+      //   return () => clearInterval(checkNewMessages);
+      // }, [username,rs,viss]); // Empty dependency array means this effect runs only once when the component mounts
   //  const [loader, setLoader] = useState(true);
+    const po = useRef(null);
 
+  const addMsg = async (e) => {
+    e.preventDefault()
+    let data
+
+    // data = {a:1,b:2}
+    if(username!='')
+      {
+        data = {username:username,id_exp:res.data.response.id,content:content }; 
+
+        // console.log(data)
+
+      } 
+
+    try {
+      const resultat = await axios.post('http://localhost/api/add_msg.php', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setContent("")
+      // console.log(resultat)
+
+      // msg.current.scrollTop = msg.current.scrollHeight;
+      // console.log(msg.current)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+   
+  };
+  const observer = new MutationObserver((mutationsList, observer) => {
+    mutationsList.forEach(mutation => {
+        // console.log(mutation);
+        // Example: log specific details
+        // console.log(newMessagess)
+        if (mutation.type === 'childList') {
+          
+          if(newMessagess && newMessagess.length!==0)
+            {
+              window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+            }
+        } else if (mutation.type === 'attributes') {
+            console.log('Attributes changed');
+        } else if (mutation.type === 'characterData') {
+            console.log('Text content changed');
+        }
+    });
+});
+          const [newMessagefs, setNewMessageffs] = useState(null);
   
   // const isArrayOfArrays = (arr)=>{
   //   return Array.isArray(arr) && arr.every(element => Array.isArray(element));
   // } 
   const location = useLocation();
+  let params = null
+   const [loader, setLoader] = useState(true);
+
   const queryParams = new URLSearchParams(location.search);
   const [inputValue,setInputValue] = useState("")
   const handleInputChange = (event)=>{
@@ -44,7 +131,7 @@ function Header() {
 
     // }
   const [user, setUser] = useState("");
-
+  
   const [likes, setLikes] = useState([]);
 
   const [minus, setMinus] = useState(false);
@@ -60,12 +147,21 @@ function Header() {
   }
 
   // const [change, setChange] = useState(false);
-
+  function isArrayEmpty(arr) {
+    return arr.length === 0;
+  }
   const [ress, setRess] = useState(null);
+  const [notig, setNotig] = useState(null);
+  
+  const [notgpv, setNotgp] = useState(null);
+
+  const [redss, setRedss] = useState(null);
+
   const [drop,setDrop] = useState(false)
-  const addLike = async (id)=>{
+  const addLike = async (id,id_liked)=>{
+    // console.log(id_liked)
     let daa
-    daa = {id_liker:res.data.response.id,id_post:id}; 
+    daa = {id_liker:res.data.response.id,id_post:id,id_liked:id_liked}; 
     // console.log(daa)
     try {
       const like = await axios.post('http://localhost/api/addLike.php', daa, {
@@ -116,14 +212,16 @@ function Header() {
   //   setContentt(e.target.value)
   // }
   // const [content2, setContent2] = useState("");
-  const postComment = async (id,value)=>{
+  const postComment = async (id,value,id_commented)=>{
     let data = {id_post:id}; 
-    console.log(id)
+    // daa = {id_liker:res.data.response.id,id_post:id,content:value}; 
+    
+    // console.log(id)
     setContentt("");
     let daa = null
     if(value!=="")
     {
-      daa = {id_liker:res.data.response.id,id_post:id,content:value}; 
+      daa = {id_commented:id_commented,id_liker:res.data.response.id,id_post:id,content:value}; 
       if(daa!==null){
     try {
       const like = await axios.post('http://localhost/api/addComment.php', daa, {
@@ -153,7 +251,7 @@ function Header() {
         'Content-Type': 'application/json',
       },
     });
-  console.log(checkNewComment)
+  // console.log(checkNewComment)
   setCheckNewComments(checkNewComment.data)
   clearInterval(checkNewCommennt)
   // clearInterval(checkNewCommennt);
@@ -165,11 +263,11 @@ function Header() {
   }}
 }
   
-  const postCommennt = async (id,value)=>{
-    console.log(id)
+  const postCommennt = async (id,value,id_commented)=>{
+    // console.log()
     let daa = null
     if(value!==""){
-      daa = {id_liker:res.data.response.id,id_post:id,content:value}; 
+      daa = {id_commented:id_commented,id_liker:res.data.response.id,id_post:id,content:value}; 
     if(daa!==null){
     try {
       const like = await axios.post('http://localhost/api/addComment.php', daa, {
@@ -178,8 +276,9 @@ function Header() {
         },
       });
       if(like.data===1){
-        window.location.href = `#send_${id}`
-        window.location.reload();
+        window.location.href = `?target=send_${id}`
+        // console.log('df')
+        // window.location.reload();
       }
       } catch (error) {
         console.error('Error:', error);
@@ -207,15 +306,16 @@ function Header() {
       }
 
       try {
-        const responses = await axios.post('http://localhost/api/addNewPost.php', dataa, {
+        responses = await axios.post('http://localhost/api/addNewPost.php', dataa, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
+        // console.log(responses)
         if(responses.data.success)
         {
           window.location.reload();
-        }  
+        }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -225,14 +325,14 @@ function Header() {
   const deletePost = async (id_post)=>{
     let dat  
     dat = {id:id_post};
-    console.log(dat)
+    // console.log(dat)
       try {
         const re = await axios.post('http://localhost/api/deletePost.php', dat, {
           headers: {
           'Content-Type': 'application/json',
           },
         });
-        console.log(re.data)
+        // console.log(re.data)
         // if(re.data===1)
           window.location.reload(true)
     } catch (error) {
@@ -324,7 +424,7 @@ function Header() {
    }
 
     const up = useRef(null);
-const popup23=useRef(null)
+    const popup23=useRef(null)
     const popup234=useRef(null)
     const popup2345=useRef(null)
     const [profile2,setProfile2] = useState(false)
@@ -423,9 +523,9 @@ const popup23=useRef(null)
         
       }
 
-      const getUserDataa = async () => {
+      const getUserDataa = async (username) => {
   
-        const data = { email: localStorage.getItem("email")}; 
+        const data = { email: localStorage.getItem("email") , input: username }; 
         // console.log(data)
         try {
           res = await axios.post('http://localhost/api/getUserData.php', data, {
@@ -499,6 +599,83 @@ const popup23=useRef(null)
         }
        return res;
       };
+
+      const getUserDataak = async (username) => {
+        let resp
+        const data = { email: localStorage.getItem("email") , input: username }; 
+        // console.log(data)
+        try {
+          resp = await axios.post('http://localhost/api/getUserData.php', data, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          // console.log(res)
+          // setFormDataa(prevState => ({
+          //   ...prevState,
+          //   older: res.data.response.image
+          // }));
+          // console.log(res.data)
+          resp.data.followers.map(async (follower)=>{
+            let sa = 0
+            const da = { email: localStorage.getItem("email") ,id:follower.id }; 
+            try {
+              sa = await axios.post('http://localhost/api/checkFollow.php', da, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+              // console.log(s.data)
+            } catch (error) {
+              console.error('Error:', error);
+            }
+        // console.log(sa)
+        follower.ok = sa.data
+        // console.log(follower)
+          })
+
+          resp.data.following.map(async (follower)=>{
+            let sad = 0
+            const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
+            try {
+              sad = await axios.post('http://localhost/api/checkFollow.php', dad, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+              // console.log(s.data)
+            } catch (error) {
+              console.error('Error:', error);
+            }
+        // console.log(sa)
+        follower.ok = sad.data
+          })
+          
+          // for (let follower in ) {
+
+          
+          // console.log(res.data)
+          
+          if(resp.data.response.image){
+            setGood4(true)
+            setImage2(false)
+          }
+          
+          // setFormData(prevState => ({
+          //   ...prevState,
+          //   e_mail: res.data.response.email,
+          //   firstName: res.data.response.first_name,
+          //   gender: res.data.response.gender,
+          //   lastName: res.data.response.last_name,
+          //   username: res.data.response.username,
+          //   id:res.data.response.id,
+          //   image:res.data.response.image
+          // }));
+        } catch (error) {
+          console.error('Error:', error);
+        }
+       return resp;
+      };
     // const getUserData = async (username) => {
     //   const data = { email: username }; 
     //   try {
@@ -533,6 +710,7 @@ const popup23=useRef(null)
     //   }
      
     // };
+          
     const [style1,setStyle1] = useState(null)
     const [style2,setStyle2] = useState(null)
     const [visibleOverlay,setVisibleOverlay] = useState(false)
@@ -556,7 +734,80 @@ const popup23=useRef(null)
     const popup44=useRef(null)
 
     const popup5=useRef(null)
+    const openPost2 = (username)=>{
+      setUsername(username)
+      // console.log(username)
+      // loader2 = true
+      setLoader2(true); // Correct way to update state in React
+      setViss(!viss)
+      setVisibleOverlay(true)
+      if(newMessagess && newMessagess.length!==0){
+        window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+// console.log(11)
+      }
+     }
 
+     useEffect(() => {
+      let data;
+      // console.log(11)
+      if (res && username!=="") {
+        data = { id_exp: res.data.response.id, username: username };
+        if (!loader2 && viss && msg.current) {
+          if(newMessagess && newMessagess.length!==0)
+            {
+              // console.log(111)
+              window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+              loader2=false;
+            }
+        }
+        if (msg.current) {
+          observer.observe(msg.current, config)
+        }
+        const fetch = async () => {
+          try {
+            let newMessagess2 = await axios.post('http://localhost/api/checkNewMessage3.php', data, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+  
+            // console.log('API Response:', response);
+            newMessagess = newMessagess2.data
+            if (newMessagess) {
+              // console.log('Data exists:', newMessagess);
+              // window.location.href = `#${response.data[response.data.length-1].id}`
+              
+              //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+  
+              if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
+                // console.log('Before updating state:', newMessagess); // Log before state update
+                setNewMessagess(newMessagess); // Update state properly
+              
+                // console.log('State updated:', newMessagess); // Log after state update
+                // if(!isArrayEmpty(newMessagess))X
+
+                  // window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+
+                setLoader2(false);  // Correctly update loader state
+              } else {
+                console.error('Response data is empty or not an array:', response.data);
+              }
+            } else {
+              console.error('API response did not contain expected data:', response);
+            }
+          } catch (error) {
+            console.error('Error occurred during API call:', error);
+          }
+        };
+  
+        // Set an interval to keep fetching new messages
+        checkNewMessages2 = setInterval(fetch, 1000);
+        return () => {
+          clearInterval(checkNewMessages2); // Cleanup the interval on component unmount or dependency change
+        };
+      }
+    }, [username, viss]);
+    
     const log=useRef(null)
     // console.log(location.state.response)
     if(location.state)
@@ -580,22 +831,32 @@ const popup23=useRef(null)
       }
     };
     const handleFileChange2 = (event) => {
-      setProfile(true)
-      setFile2(event.target.files[0]);
-      const file2 = event.target.files[0];
-      // console.log(file2)
+      const file = event.target.files[0]; // Access the selected file directly
+    
+      if (!file) {
+        console.log("No file selected.");
+        return; // Early exit if no file selected
+      }
+    
+      // Set state for profile and form data
+      setProfile(true);
+      setFile2(file); // Update the file state
+    
       setFormData(prevState => ({
         ...prevState,
-        image: file2
+        image: file
       }));
-      if (file2 && file2.type.startsWith('image/')) {
+    
+      // Check if the selected file is an image
+      if (file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onload = (e) => {
           setImage2(e.target.result); // Set the image source for preview
         };
-        reader.readAsDataURL(file2);
+        reader.readAsDataURL(file);
       } else {
         console.log("Please upload an image file.");
+        // Optionally, you could also set an error state here for UI feedback.
       }
     };
     const [vis,setVis] = useState(false)
@@ -682,20 +943,30 @@ const popup23=useRef(null)
         setStyle2(closed)
         setVisibleOverlay(false)
 
+        document.body.style.overflow = "unset"
 
     }
     const closeNav2 = ()=>{
         setStyle2(closed)
         setStyle1(closed)
         setVisibleOverlay(false)
+        document.body.style.overflow = "unset"
 
     }
-    const openNav1 = ()=>{
+    const openNav1 = async ()=>{
         setStyle1(opened)
         setStyle2(closed)
         setVisibleOverlay(true)
-
-
+        document.body.style.overflow = "hidden"
+        try {
+            await axios.get('http://localhost/api/removeFlagOne.php', {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+        } catch (error) {
+          console.error('Error:', error);
+        }
     }
     const openPost = ()=>{
       setVis(!vis)
@@ -724,11 +995,20 @@ const popup23=useRef(null)
       }
 
 
-    const openNav2 = ()=>{
+    const openNav2 = async ()=>{
         setStyle2(opened)
         setStyle1(closed)
         setVisibleOverlay(true)
-
+        document.body.style.overflow = "hidden"
+        try {
+          await axios.get('http://localhost/api/removeFlagTwo.php', {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+        } catch (error) {
+          console.error('Error:', error);
+        }
     }
     const handleUpdate = async () => {
       
@@ -804,8 +1084,120 @@ const popup23=useRef(null)
         
         })();
       }, []);
+    
+
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            // Fetch user data
+            const res = await getUserDataa(localStorage.getItem("email"));
+            const data = { 
+              email: localStorage.getItem("email"), 
+              id: res.data.response.id 
+            };
+    
+            // Fetch notifications
+            const notigp = await axios.post('http://localhost/api/getNotifications.php', data, {
+              headers: { 'Content-Type': 'application/json' }
+            });
+    
+            // console.log('Notifications response:', notigp.data);
+    
+            // Set notifications state
+            setNotig(notigp.data);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
+    
+        fetchData();
+      }, []); // Empty dependency array ensures this runs once when the component mounts
+    
+      // useEffect(() => {
+      //   if (!res) return; // Early return if `res` is not available
+    
+      //   const data = { id_exp: res.data.response.id }; 
+        
+    
+      // }, [res]); // Run effect again if `res` changes
+      useEffect(() => {
+        const fetchDataa = async () => {
+          try {
+            // Fetch user data only once on component mount
+            const email = localStorage.getItem("email");
+            resl = await getUserDataak(email);
+            // console.log(resl)
       
+            const data = { 
+              id: resl.data.response.id 
+            };
+      
+            // Fetch messages
+            const notgp = await axios.post('http://localhost/api/getMessages.php', data, {
+              headers: { 'Content-Type': 'application/json' }
+            });
+            setNotgp(notgp.data);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
+      
+        // Run the fetchDataa function once when the component mounts
+        fetchDataa();
+      
+        // If you want to poll for new messages after that, you can still set up the interval
+        const checkNew = setInterval(async () => {
+          try {
+            // const resl = await getUserDataak(email);
+      
+            const data = { 
+              id: resl.data.response.id 
+            };
+      
+            // Fetch new messages
+            const notgp = await axios.post('http://localhost/api/getMessages.php', data, {
+              headers: { 'Content-Type': 'application/json' }
+            });
+            setNotgp(notgp.data);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }, 1000);
+      
+        // Cleanup function to clear the interval
+        return () => clearInterval(checkNew);
+      
+      }, []); // Empty dependency array ensures this useEffect runs only once
+      
+      // Log notig when it changes
+      useEffect(() => {
+        if (notig !== null) {
+          // console.log('Updated notifications:', notig);
+        }
+      }, [notig]); // This will run every time notig state is updated
+      useEffect(() => {
+        // const params = new URLSearchParams(window.location.search);
+          // const target = params.get('target');
+          const target = new URLSearchParams(location.hash.substring(1)).get("target");
+          // alert(target);
+
+          if (target) {
+              const targetElement = document.getElementById(target);
+              // console.log(targetElement);
+
+              if (targetElement) {
+                  // Scroll the target element into view with smooth scrolling
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+          }
+        }
+        
+        ,[])
+
+
     useEffect(() => {
+          
       const handleClickOutside = (event) => {
 
         // console.log(event.target)
@@ -857,6 +1249,7 @@ const popup23=useRef(null)
       }
 
       if(closeBtnSidenave1.current.contains(event.target) && sidenave1.current){
+        closeNav1()
         setVisibleOverlay(false)
       }
       if(closeBtnSidenave2.current.contains(event.target) && sidenave2.current){
@@ -888,6 +1281,8 @@ const popup23=useRef(null)
           }
       if (sidenave1.current  && !sidenave1.current.contains(event.target)) {
         // if(popup2.current && popup2.current.contains(event.target))
+        closeNav1()
+
         //   setVisibleOverlay(true);  // Hide the div
         // else
         //   setVisibleOverlay(false);  // Hide the div
@@ -901,6 +1296,8 @@ const popup23=useRef(null)
         up.current.style.display='none'
     } 
     if (sidenave1.current  && !sidenave1.current.contains(event.target)) {
+      closeNav1()
+
           if(popup23.current && popup23.current.contains(event.target))
             setVisibleOverlay(true);  // Hide the div
           if(popup234.current && popup234.current.contains(event.target))
@@ -942,6 +1339,8 @@ const popup23=useRef(null)
           up.current.style.display='none'
       }
       if (sidenave1.current  && !sidenave1.current.contains(event.target)) {
+        closeNav1()
+
         if(popup23.current && popup23.current.contains(event.target))
           setVisibleOverlay(true);  // Hide the div
         if(popup234.current && popup234.current.contains(event.target))
@@ -1014,6 +1413,8 @@ up.current.style.display='none'
     }
         // Check if the click was outside the div
         if (sidenave1.current  && !sidenave1.current.contains(event.target)) {
+        closeNav1()
+
           if(popup90.current && popup90.current!=event.target && popup23.current && !popup23.current.contains(event.target))
             up.current.style.display='none'
           
@@ -1045,6 +1446,8 @@ up.current.style.display='none'
         }
 
         if (sidenave1.current && !sidenave1.current.contains(event.target)) {
+        closeNav1()
+
           if(popup2.current && popup2.current.contains(event.target))
             setVisibleOverlay(true);
             setStyle1(closed)
@@ -1127,6 +1530,19 @@ up.current.style.display='none'
                 up.current.style.display='none'
               }
           }
+          if(!closeBtnSidenave1.current.contains(event.target) && sidenave1.current.contains(event.target)){
+            openNav1()
+          }
+
+          if(!closeBtnSidenave2.current.contains(event.target) && sidenave2.current.contains(event.target)){
+            openNav2()
+          }
+
+          // if(popup23.current && !popup23.current.contains(event.target)){
+          //   closePost2()
+          //   // setVisibleOverlay(false)
+          //   setViss(false)
+          // }
       };
   
       document.addEventListener('mousedown', handleClickOutside);
@@ -1166,11 +1582,46 @@ up.current.style.display='none'
             let data = {id:rees.data.response.id}; 
             // console.log(data)
             try {
+              rresponses = await axios.post('http://localhost/api/posts.php', data, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+
+              // console.log(rresponses.data)
+              if(rresponses.data.length>0)
+                {
+                  rresponses.data.map((item,index)=>{
+                    let table = [item.num_of_likes,index]
+                    // console.log(table)
+                    setLikes((prevState) => [...prevState, table]);
+                  })
+                  setRedss(rresponses.data)
+                  // console.log(rresponses.data)
+                  setCheckNewComments(rresponses.data)
+                  // console.log(rresponses.data)
+                  // document.body.click();
+                }
+                // console.log(ress)
+              } catch (error) {
+              console.error('Error:', error);
+            }
+          })();
+      }, []);
+      useEffect(() => {
+
+        (async () => {
+            let rees = await getUserDataa(localStorage.getItem("email"));  
+            // console.log(rees)
+            let data = {id:rees.data.response.id}; 
+            // console.log(data)
+            try {
               rresponses = await axios.post('http://localhost/api/retrievePosts.php', data, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
               });
+
               // console.log(rresponses.data)
               if(rresponses.data.length>0)
                 {
@@ -1191,7 +1642,6 @@ up.current.style.display='none'
             }
           })();
       }, []);
-
        useEffect(() => {
             setFollowers(false)
             setFollowing(false)
@@ -1216,12 +1666,95 @@ up.current.style.display='none'
   //       console.log('Component unmounted!');
   //     };
   //   }, [checkNewComments]);
-    
+  const closePost2 = ()=>{
+    clearInterval(checkNewMessages)
+    setLoader(true)
+    // loader2 = false
+    setLoader2(false); // Correct way to update state in React
+    setVisibleOverlay(false)
+    popup23.current.style.animation = 'fadeOut 0.2s ease'
+    // alert(popup23.current.style.animation)
+    popup23.current.addEventListener('animationend', () => {
+      popup23.current.style.display = 'none'; // Remove the element from the layout after the animation ends
+      setViss(!viss)
+    });
+   }
+  const [flag,setFlag] = useState(false)
+  useEffect(() => {
+    if (!res) return; // Early return if `res` is not available
+
+    const data = { id_exp: res.data.response.id }; 
+    const checkNewMessagess = setInterval(async () => {
+      try {
+        const response = await axios.post('http://localhost/api/checkNewMessages2.php', data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        setNewMessageffs(response.data); // Save the new messages to state
+        // console.log(response.data);
+        if(response.data!==0) // Log the messages to the console
+          setFlag(true)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }, 1000);
+
+    // Cleanup function to clear the interval
+    return () => clearInterval(checkNewMessagess);
+
+  }, [res]); // Run effect again if `res` changes
   return (
     <>
     {visibleOverlay && <div className="overlay"></div>}
+    {viss && <div ref={po} className='all'>
+  <div ref={popup23} className="post">
+  <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
+    <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
+      {!loader2 && newMessagess[0].pic && (<img 
+            src={`http://localhost/${newMessagess[0].pic}`} 
+            alt="Preview" 
+            // id="image30" 
+            style={{marginRight:'10px',objectFit: 'cover',width:'45px',height:'45px',borderRadius:'50%'}}
+          />)}
+          {!loader2 && !newMessagess[0].pic && <i id="profile31" className="dropbtn fa-solid fa-user"></i>}
+          
+          {!loader2 && <span style={{fontSize:'1.3em'}}>{newMessagess[0].name}(@{newMessagess[0].username})</span>}
+         </div>
+                <i id="close" style={{fontSize:'1.2em',left:'20px'}} onDoubleClick={closePost2} onClick={closePost2} className="fa-solid fa-x"></i>
+
+                </div>
+                <hr style={{width:'100%',opacity:'0.4'}}/>
+
+    
+    <form ref={form} style={{height:'90%',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
+      <div ref={msg} style={{position:'relative',zIndex:'1',overflowY:'scroll',height:'100%',width:'100%',display:'flex',flexDirection:'column',alignSelf:'flex-start'}}>
+      {loader2 && <div className="loader"></div>}
+      {!loader2 && newMessagess.length > 0 && newMessagess.map((item, index) => {
+  return (
+    res.data.response.id === item.id_dest ? 
+      <div key={index} id={item.id} style={{fontSize:'0.9em',alignSelf:'flex-end',width:'60%',color:'white',borderRadius:'5px',margin:'10px 10px',padding:'10px',backgroundColor:'#0c6dfd'}}>
+        <span>{item.content}</span><br/>
+        <span>{item.moment}</span>
+      </div> :
+      <div key={index} id={item.id} style={{fontSize:'0.9em',alignSelf:'flex-start',width:'60%',color:'black',borderRadius:'5px',margin:'10px 10px',padding:'10px',border:'1px solid rgba(0,0,0,0.5)',backgroundColor:'#FFF'}}>
+        <span>{item.content}</span><br/>
+        <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.6)'}}>{item.moment}</span>
+      </div> 
+  );
+})}
+
+      </div>
+      <div style={{width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
+        <input value={content} onChange={handleContentChange} placeholder='say something...' type="text" name="say" id="say"/>
+        <button className="send" type="submit">Send</button>
+        </div>
+    </form>
+  </div>
+  </div>}
     <header id="section1">
-        <div><a href=""><img id="logo" src={Logo} alt="logo"/></a></div>
+        <div><a href=""><span id="logo">soc-net</span></a></div>
         <div id="second">
         <div className="dropdown">
           <input value={user} onChange={handle} onClick={()=>{search.current.style.display='block'}} type="text" name="user" placeholder='looking for someone...'/>
@@ -1265,11 +1798,17 @@ up.current.style.display='none'
             </div>}
           </div>
         </div>
-        <nav>
+        <nav id="navi">
             <i onClick={()=>{setEditTrue(false);setEdtTrue(true);window.location.reload(true);}} className="fa-solid fa-house"></i>
             <i onClick={openPost} className="fa-solid fa-circle-plus"></i>
-            <i onClick={openNav1} className="fa-solid fa-bell"></i>
-            <i onClick={openNav2} className="fa-solid fa-message"></i>
+            <div style={{display:'inline-block',position:'relative'}}>
+              {notig!==null && notig.cou > 0 ? <div style={{borderRadius:'50%',backgroundColor:'red',width:'10px',height:'10px',position:'absolute',left:'30px',top:'16px'}}></div>:""}
+              <i onClick={openNav1} className="fa-solid fa-bell"></i>
+            </div>
+            <div style={{display:'inline-block',position:'relative'}}>
+              {notgpv!==null && notgpv.cou>0 ? <div style={{borderRadius:'50%',backgroundColor:'red',width:'10px',height:'10px',position:'absolute',left:'30px',top:'16px'}}></div>:""}
+              <i onClick={openNav2} className="fa-solid fa-message"></i>
+            </div>
             <div className="dropdown">
             {!image2 && formData.image && <img  ref={popup44}
             src={`http://localhost/uploads/${formData.image}`} 
@@ -1297,11 +1836,72 @@ up.current.style.display='none'
     </header>
     <div ref={sidenave1} style={style1} className="sidenav">
     <a ref={closeBtnSidenave1} className="closebtn" onClick={closeNav1}>&times;</a>
-    <h1>Notifications</h1>
+    <h1 style={{marginBottom:'20px'}}>Notifications</h1>
+    {notig != null && Array.isArray(notig.notifications) && notig.notifications.map((item, index) => {
+  return (
+    <div key={index} style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{position:'relative',display: 'flex',alignItems:'center',marginLeft:'20px'}}>
+                {item.profile_pic == null ? 
+          <i id="profile11" className="dropbtn fa-solid fa-user"></i> :
+          <img style={{
+            marginLeft: '1px',
+            marginBottom: '6px',
+            maxWidth: '100%',
+            marginRight: '5px',
+            height: '35px',
+            width: '35px',
+            verticalAlign: 'middle',
+            borderRadius: '50%'
+        }} src={`http://localhost/${item.profile_pic}`} alt="Profile" />
+        }
+        <div>
+          <Link style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em'}} to={`/profile?username=${item.username}`}><p style={{fontWeight:'500'}}>{item.name}</p></Link> 
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>@{item.username} {item.texte} !</p>
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
+        </div>
+        {
+          item.flag == 1 && <div style={{borderRadius:'50%',backgroundColor:'rgba(0,0,255,0.6)',width:'10px',height:'10px',position:'relative',left:'10px'}}></div>
+        }
+      </div>
+      <hr/>
+    </div>
+  );
+})}
+
   </div>
   <div ref={sidenave2} style={style2} className="sidenav">
     <a ref={closeBtnSidenave2} className="closebtn" onClick={closeNav2}>&times;</a>
-    <h1>Messages</h1>
+    <h1 style={{marginBottom:'20px'}}>Messages</h1>
+    {notgpv != null && Array.isArray(notgpv.notifications) && notgpv.notifications.map((item, index) => {
+  return (
+    <div key={index} style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{position:'relative',display: 'flex',alignItems:'center',marginLeft:'20px'}}>
+          {item.profile_pic == null ? 
+          <i id="profile11" className="dropbtn fa-solid fa-user"></i> :
+          <img style={{
+            marginLeft: '1px',
+            marginBottom: '6px',
+            maxWidth: '100%',
+            marginRight: '5px',
+            height: '35px',
+            width: '35px',
+            verticalAlign: 'middle',
+            borderRadius: '50%'
+        }} src={`http://localhost/${item.profile_pic}`} alt="Profile" />
+        }
+        <div>
+          <p onClick={()=>{openPost2(item.username);closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
+        </div>
+        {
+          item.flag == 1 && <div style={{borderRadius:'50%',backgroundColor:'rgba(0,0,255,0.6)',width:'10px',height:'10px',position:'relative',left:'40px'}}></div>
+        }
+      </div>
+      <hr/>
+    </div>
+  );
+})}
   </div>
   {edit && <div id="edit">
 
@@ -1328,8 +1928,12 @@ up.current.style.display='none'
       )}
       <p style={{padding:'10px 20px',fontSize:'1.1em',fontWeight:'400'}}>Change Profile Picture</p>
 
-      <input accept="image/*"
-        onChange={handleFileChange2} id="put" style={{height:'auto',width:'40%',border:'1px solid #ced4da',fontSize:'1.2em',padding:'5px',margin:'0px 20px',marginBottom:'10px'}} type="file"/><br/>
+      <input 
+  accept="image/*"
+  onChange={handleFileChange2} 
+  id="put" 
+  type="file"
+/><br/>
 
       <input value={formData.firstName} onChange={handleChange1} placeholder='first name' style={{margin:'15px 10px 0px 20px',height:'50px',width:'45%'}} type="text" name="firstName"/>
       
@@ -1365,7 +1969,7 @@ up.current.style.display='none'
         </div>
       )}
       <input accept="image/*" 
-        onChange={handleFileChange} id="put" style={{height:'auto',width:'100%',border:'1px solid #ced4da',fontSize:'1.2em',padding:'5px',marginBottom:'10px'}} type="file"/><br/>
+        onChange={handleFileChange} id="put" style={{height:'auto',width:'90%',border:'1px solid #ced4da',fontSize:'1.2em',padding:'5px',marginBottom:'10px'}} type="file"/><br/>
       <label htmlFor="say">Say Something</label><br/>
       <input style={{height:'35px',padding:'5px',width:'100%',marginTop:'10px',marginBottom:'10px'}} type="text" value={content} onChange={handleContentChange} name="say" id="say"/><br/>
       <input type="submit" value="Post" style={{padding:'10px',color:'white',backgroundColor:'#0b5ed7'}}/>
@@ -1441,7 +2045,7 @@ up.current.style.display='none'
                   const newLikes = [...likes];
                   newLikes[index][0] += 1;
                   setLikes(newLikes);
-                  addLike(item.id_post);event.target.style.display='none';event.target.previousElementSibling.style.display='block';}} style={{display:item.liked?'none':'block',fontSize:'1.5em',margin:'5px'}} className="fa-regular fa-heart"></i>
+                  addLike(item.id_post,item.id);event.target.style.display='none';event.target.previousElementSibling.style.display='block';}} style={{display:item.liked?'none':'block',fontSize:'1.5em',margin:'5px'}} className="fa-regular fa-heart"></i>
                 
                 <i style={{fontSize:'1.5em',margin:'5px 10px 5px 5px'}} className="fa-regular fa-comment"></i> <span onClick={()=>openComments(item.id_post)} style={{fontSize:'0.8em',fontStyle:'italic',fontWeight:'600'}}>{item.num_of_comments} comments</span></div>
               <hr style={{opacity:'0.3',width:'100%'}}/>
@@ -1459,7 +2063,7 @@ up.current.style.display='none'
               <div style={{marginBottom:'10px',width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
                 <input placeholder='say something...' type="text" id={`${index}`} className="sayy"/>
                 <button className={`send_${item.id_post}`} onClick={(e)=>{
-                  postCommennt(item.id_post,e.target.previousElementSibling.value);
+                  postCommennt(item.id_post,e.target.previousElementSibling.value,item.id);
                   }} type="submit">Post</button>
               </div>
             </div>
@@ -1468,7 +2072,7 @@ up.current.style.display='none'
   })}
   
             </div>}</div>
-    <div style={{flexGrow: 6,maxWidth:'400px',minWidth:'400px',display:'inline-block',verticalAlign:'top'}}>
+    <div id="follow">
     
         <div style={{display:'flex',flexDirection:'column',padding:'2px',margin:'25px 30px',verticalAlign:'top'}}>
         <div style={{display:'flex'}}>
@@ -1608,7 +2212,7 @@ up.current.style.display='none'
           <span style={{fontSize:'2em'}}>{formData.firstName} {formData.lastName}</span>
           <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formData.username}</span>
           <div style={{marginTop:'20px'}}>
-          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>0 Posts</button>
+          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{res && res.data.response.n_posts!==0 && res.data.response.n_posts} Posts</button>
           <button className='follo' onClick={()=>{openFollowers();}}><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{res && res.data.response.num_of_followers} Followers</button>
           <button onClick={()=>{openFollowing();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{res && res.data.response.num_of_following} Following</button>
 
@@ -1842,8 +2446,8 @@ up.current.style.display='none'
           return(
             <div style={{display:'none'}} className={`allp comments boxC_${item.id_post}`} key={item.id_post}>
                 <div className='postg'>
-                  <div style={{width: '65%', height: '100%', overflow: 'hidden', position: 'relative'}}><img style={{width: '100%', height: '100%', position: 'absolute'}} src={`http://localhost/${item.photo}`}/></div>
-                  <div style={{width:'35%',height: '100%',backgroundColor:'white',padding:'10px'}}>
+                  <div className='maroc'><img src={`http://localhost/${item.photo}`}/></div>
+                  <div className="senegal">
                     <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                       <div style={{display:'flex',alignItems:'center'}}>
                       {item.profile_pic==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
@@ -1876,78 +2480,48 @@ up.current.style.display='none'
 
                     </div>
                     <hr style={{opacity:'0.5',width:'100%'}}/>
-                    <div style={{display:'flex',flexDirection:'column',maxHeight:'100%',height:'76%',overflowY:'scroll'}}>
-{/* {isArrayOfArrays(checkNewComments)? checkNewComments[index] && checkNewComments[index].length!==0 && checkNewComments[index].map((itm,index)=>{
-return(
-  <>
-                      <div key={index} id={index} style={{display:'flex'}}>
-                      {itm.image==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
-            {itm.image!=null && <img 
-                src={`http://localhost/${itm.image}`} 
-                alt="Preview" 
-                style={{
-                    marginLeft: '1px',
-                    marginBottom: '6px',
-                    maxWidth: '100%',
-                    marginRight: '5px',
-                    height: '45px',
-                    width: '45px',
-                    verticalAlign: 'middle',
-                    borderRadius: '50%'
-                }} 
-            />}
-                        <div style={{marginLeft:'10px'}}>
-                          <span style={{fontWeight:'700',color:'rgba(0,0,0,0.5)'}}>@{itm.username}</span> - <span style={{fontWeight:'500',fontSize:'0.9em'}}>{itm.content}</span><br/>
-                          <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.5)'}}>({itm.formatted_time})</span>
-                        </div>
-                      </div>
-                      </>
-)}
-) 
-:checkNewComments.data && checkNewComments.data.length!==0 && checkNewComments.data.map((itm,index)=>{
-  return(
-    <>
-                        <div key={index} id={index} style={{display:'flex'}}>
-                        {itm.image==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
-              {itm.image!=null && <img 
-                  src={`http://localhost/${itm.image}`} 
-                  alt="Preview" 
-                  style={{
-                      marginLeft: '1px',
-                      marginBottom: '6px',
-                      maxWidth: '100%',
-                      marginRight: '5px',
-                      height: '45px',
-                      width: '45px',
-                      verticalAlign: 'middle',
-                      borderRadius: '50%'
-                  }} 
-              />}
-                          <div style={{marginLeft:'10px'}}>
-                            <span style={{fontWeight:'700',color:'rgba(0,0,0,0.5)'}}>@{itm.username}</span> - <span style={{fontWeight:'500',fontSize:'0.9em'}}>{itm.content}</span><br/>
-                            <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.5)'}}>({itm.formatted_time})</span>
-                          </div>
-                        </div>
-                        </>
-  )}
-  ) 
-  } */}
+                    <div className="france">
+
        <Comments trigger={trigger} checkNewComments={checkNewComments} />
 
                     </div>
                     <hr style={{opacity:'0.5',width:'100%'}}/>
                     <div style={{marginBottom:'10px',width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
                         <input placeholder='say something...' type="text" className="sayy"/>
-                      <button onClick={(e)=>{postComment(item.id_post,e.target.previousElementSibling.value);e.target.previousElementSibling.value="";}} className={`send_${item.id_post}`} type="submit">Post</button>
+                      <button onClick={(e)=>{postComment(item.id_post,e.target.previousElementSibling.value,item.id);e.target.previousElementSibling.value="";}} className={`send_${item.id_post}`} type="submit">Post</button>
                     </div>
                   </div>
                 </div>
             </div> 
           );
          }) }
-        
+         {!edit && profile && <div style={{textAlign:'center',marginBottom:'20px'}}>
+        <h1>Posts</h1>
+        {/* {redss!==null && redss.length===0 && } */}
+        <div style={{textAlign:'center',display:'flex',width:'70%',margin:'auto'}}>
+        {redss!==null && redss.length!=0 ? redss.map((item, index) => {
+      return (
+          <div id={`sen_${item.id_post}`} className="edcctp" key={index}>
             
-      
+            <img 
+                onClick={()=>openComments(item.id_post)}
+                src={`http://localhost/${item.photo}`} 
+                alt="Preview" 
+                style={{
+                    // marginLeft: '1px',
+                    marginBottom: '6px',
+                    maxWidth: '100%',
+                    marginRight: '15px',
+                    display:'inline-block',
+                    height: '200px',
+                    width: '300px',
+                    verticalAlign: 'middle',
+                }} 
+            />
+            
+          </div>
+      );
+  }):<p style={{width:'70%',margin:'auto',padding:'10px',backgroundColor:'rgba(0,0,0,0.2)'}}><i style={{marginRight:'10px',color:'#FFF',borderRadius:'50%',padding:'10px',backgroundColor:'rgba(0,0,0,0.7)'}} class="fa-solid fa-x"></i>You don't have any post</p>}  </div></div>}
   </>
   )
 }

@@ -51,3 +51,9 @@ a{
     color:rgb(74, 139, 252);
     text-decoration: none;
 }
+
+@media only screen and (max-width: 400px) {
+    #from {
+      width: 90%;
+    }
+  }

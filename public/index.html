@@ -8,6 +8,9 @@
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap" rel="stylesheet">
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -25,9 +28,27 @@
     <script>
       const pattern = /id=\d+/;  // Matches one or more digits
       const handleLoad = () => {
-          if(/id=/.test(window.location.href)) {
-            window.location.href = `#send_`+`#send_${window.location.href.match(pattern)[0]}`.slice(9)
-            clearInterval(intervalId);
+          if(/target=/.test(window.location.href)) {
+            const currentUrl = window.location.href;
+            // Create a URL object
+            const url = new URL(currentUrl);
+            // Get the value of the 'target' parameter
+            const targetValue = url.searchParams.get('target');
+            if (targetValue) {
+              // Select the element with the id matching the targetValue
+              const targetElement = document.getElementById(targetValue);
+
+              if (targetElement) {
+                  // Scroll to the element
+                  targetElement.scrollIntoView({
+                      behavior: 'smooth', // Optional: adds smooth scrolling
+                      block: 'start',     // Aligns to the top of the viewport
+                  });
+                  clearInterval(intervalId)
+              } else {
+                  console.error(`No element found with id "${targetValue}".`);
+              }
+          }
           }
       };
       

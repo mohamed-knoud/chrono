@@ -4,26 +4,324 @@ import Logo from './logo.png'
 import { Link , useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Comments from './Comments';
+let likesElemeents = null
+let resl = null
+
 let res 
 let rs = null
 let newMessagess = null
+// let newMessagess2 = null
+
 let loader2 = true 
 // let noImage = 1
+const regex = /^del_[0-9]+/;
+
+let checkNewCommennt
+let checkNewComment = []
+let rresponses = null
+
 function Profile() {
+const [notig, setNotig] = useState(null);
+const getUserDataak = async (username) => {
+  let resp
+  const data = { email: localStorage.getItem("email") , input: username }; 
+  // console.log(data)
+  try {
+    resp = await axios.post('http://localhost/api/getUserData.php', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    // console.log(res)
+    // setFormDataa(prevState => ({
+    //   ...prevState,
+    //   older: res.data.response.image
+    // }));
+    // console.log(res.data)
+    resp.data.followers.map(async (follower)=>{
+      let sa = 0
+      const da = { email: localStorage.getItem("email") ,id:follower.id }; 
+      try {
+        sa = await axios.post('http://localhost/api/checkFollow.php', da, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        // console.log(s.data)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  // console.log(sa)
+  follower.ok = sa.data
+  // console.log(follower)
+    })
+
+    resp.data.following.map(async (follower)=>{
+      let sad = 0
+      const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
+      try {
+        sad = await axios.post('http://localhost/api/checkFollow.php', dad, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        // console.log(s.data)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  // console.log(sa)
+  follower.ok = sad.data
+    })
+    
+    // for (let follower in ) {
+
+    
+    // console.log(res.data)
+    
+    if(resp.data.response.image){
+      setGood4(true)
+      setImage2(false)
+    }
+    
+    // setFormData(prevState => ({
+    //   ...prevState,
+    //   e_mail: res.data.response.email,
+    //   firstName: res.data.response.first_name,
+    //   gender: res.data.response.gender,
+    //   lastName: res.data.response.last_name,
+    //   username: res.data.response.username,
+    //   id:res.data.response.id,
+    //   image:res.data.response.image
+    // }));
+  } catch (error) {
+    console.error('Error:', error);
+  }
+ return resp;
+};
   const location = useLocation();
+    const [trigger, setTrigger] = useState(false)
+    const [notgpv, setNotgp] = useState(null);
+  
   let username = ''
    const [loader, setLoader] = useState(true);
+     const [checkNewComments, setCheckNewComments] = useState([]);
+     const [contentt, setContentt] = useState("");
+     const postComment = async (id,value,id_commented)=>{
+      let data = {id_post:id}; 
+      // console.log(id)
+      setContentt("");
+      let daa = null
+      if(value!=="")
+      {
+        daa = {id_commented:id_commented,id_liker:rs.data.response.id,id_post:id,content:value}; 
+        if(daa!==null){
+      try {
+        const like = await axios.post('http://localhost/api/addComment.php', daa, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        // if(like.data===1){
+        //   window.location.href = `#comment_${id}`
+        //   window.location.reload();
+        // }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  
+    checkNewCommennt = setInterval(async () => {
+      // if(checkNewComments && checkNewComments.data.length!==0)
+      //   {
+      //     window.location.href = `#${checkNewComments.data[checkNewComments.data.length-1].id}`
+      //   }
+    // if (msg.current) {
+    //   observer.observe(msg.current, config)
+    // }
+    try {
+      checkNewComment = await axios.post('http://localhost/api/checkNewComments.php', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    // console.log(checkNewComment)
+    setCheckNewComments(checkNewComment.data)
+    clearInterval(checkNewCommennt)
+    // clearInterval(checkNewCommennt);
+  
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }, 1000);
+    }}
+  }
   // const [noImage,setNoImage] = useState(false)
+  const [ress, setRess] = useState(null);
+  // const [redss, setRedss] = useState(null);
 
   const searchParams = new URLSearchParams(location.search);
-
+  useEffect(() => {
+    const fetchDataa = async () => {
+      try {
+        // Fetch user data only once on component mount
+        const email = localStorage.getItem("email");
+        resl = await getUserDataak(email);
+        // console.log(resl)
+  
+        const data = { 
+          id: resl.data.response.id 
+        };
+  
+        // Fetch messages
+        const notgp = await axios.post('http://localhost/api/getMessages.php', data, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+        setNotgp(notgp.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+  
+    // Run the fetchDataa function once when the component mounts
+    fetchDataa();
+  
+    // If you want to poll for new messages after that, you can still set up the interval
+    const checkNew = setInterval(async () => {
+      try {
+        // const resl = await getUserDataak(email);
+  
+        const data = { 
+          id: resl.data.response.id 
+        };
+  
+        // Fetch new messages
+        const notgp = await axios.post('http://localhost/api/getMessages.php', data, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+        setNotgp(notgp.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }, 1000);
+  
+    // Cleanup function to clear the interval
+    return () => clearInterval(checkNew);
+  
+  }, []); // Empty dependency array ensures this useEffect runs only once
   username =  searchParams.get('username'); // Get the 'myParam' query parameter
+  const getUserDataa = async (username) => {
+  
+    const data = { email: localStorage.getItem("email") , input: username }; 
+    try {
+      res = await axios.post('http://localhost/api/getUserData.php', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(res)
+      setFormDataa(prevState => ({
+        ...prevState,
+        older: res.data.response.image
+      }));
+      res.data.followers.map(async (follower)=>{
+        let sa = 0
+        const da = { email: localStorage.getItem("email") ,id:follower.id }; 
+        try {
+          sa = await axios.post('http://localhost/api/checkFollow.php', da, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          // console.log(s.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    // console.log(sa)
+    follower.ok = sa.data
+      })
 
+      res.data.following.map(async (follower)=>{
+        let sad = 0
+        const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
+        try {
+          sad = await axios.post('http://localhost/api/checkFollow.php', dad, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          // console.log(s.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    // console.log(sa)
+    follower.ok = sad.data
+      })
+      
+      // for (let follower in ) {
+          
+      
+      if(res.data.image){
+        setGood4(true)
+        setImage2(false)
+      }
+      
+      setFormDataa(prevState => ({
+        ...prevState,
+        e_maila: res.data.response.email,
+        firstNamea: res.data.response.first_name,
+        gendera: res.data.response.gender,
+        lastNamea: res.data.response.last_name,
+        usernamea: res.data.response.username,
+        ida:res.data.response.id,
+        imagea:res.data.response.image
+      }));
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    return res;
+   
+  };
      const [file, setFile] = useState(null);
+   const [likes, setLikes] = useState([]);
  
     const closeBtnSidenave1 = useRef(null);
     const form = useRef(null);
     const po = useRef(null);
+    const openComments = (id_post) => {
+      // console.log(document.querySelector(`.allp.comments.boxC_${id_post}`))
+      // console.log(id_post)
+      // setCheckNewComments([])
+      if(document.querySelector(`.allp.comments.boxC_${id_post}`).style.display=='none'){
+        document.querySelector(`.allp.comments.boxC_${id_post}`).style.display='flex';
+        // alert(11)
+      }
+      let data = {id_post:id_post}; 
+      checkNewCommennt = setInterval(async () => {
+          // if(checkNewComments && checkNewComments.data.length!==0)
+          //   {
+          //     window.location.href = `#${checkNewComments.data[checkNewComments.data.length-1].id}`
+          //   }
+        // if (msg.current) {
+        //   observer.observe(msg.current, config)
+        // }
+        try {
+          checkNewComment = await axios.post('http://localhost/api/checkNewComments.php', data, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+        // console.log(checkNewComment)
+        setCheckNewComments(checkNewComment.data)
+        clearInterval(checkNewCommennt)
+        // clearInterval(checkNewCommennt);
+
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }, 1000);
+      setVisibleOverlay(true)
+
+    }
     const addNewPost = async (e)=>{
       e.preventDefault()
       let dataa
@@ -53,7 +351,11 @@ function Profile() {
       }
       }
     }
-
+   useEffect(() => {
+        if (notig !== null) {
+          console.log('Updated notifications:', notig);
+        }
+      }, [notig]); // This will run every time notig state is updated
     const closeBtnSidenave2 = useRef(null);
   // let { username } = useParams();
   //console.log(username)
@@ -216,10 +518,11 @@ function Profile() {
     const [good33, setGood33] = useState(false);
     const [profile,setProfile] = useState(true)
     const [profile2,setProfile2] = useState(false)
+    const [redss, setRedss] = useState(null);
 
     // const [visible,setVisible] = useState(true)
     const [edit,setEditTrue] = useState(false)
-    const [edt,setEdtTrue] = useState(true)
+    const [edt,setEdtTrue] = useState(false)
 
     // const [response, setResponse] = useState(null);
     const [formData, setFormData] = useState({
@@ -288,6 +591,80 @@ function Profile() {
           }));
         
       }
+
+
+
+      useEffect(() => {
+
+        (async () => {
+            // let rees = await getUserDataa(localStorage.getItem("email")); 
+            let rees = await getUserDataa(username);  
+
+            // console.log(rees)
+            let data = {id:rees.data.response.id}; 
+            // console.log(data)
+            try {
+              rresponses = await axios.post('http://localhost/api/posts.php', data, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+
+              // console.log(rresponses.data)
+              if(rresponses.data.length>0)
+                {
+                  rresponses.data.map((item,index)=>{
+                    let table = [item.num_of_likes,index]
+                    // console.log(table)
+                    setLikes((prevState) => [...prevState, table]);
+                  })
+                  setRedss(rresponses.data)
+                  // console.log(rresponses.data)
+                  setCheckNewComments(rresponses.data)
+                  // console.log(rresponses.data)
+                  // document.body.click();
+                }
+                // console.log(ress)
+              } catch (error) {
+              console.error('Error:', error);
+            }
+          })();
+      }, []);
+
+      useEffect(() => {
+
+        (async () => {
+            let rees = await getUserDataa(localStorage.getItem("email"));  
+            // console.log(rees)
+            let data = {id:rees.data.response.id}; 
+            // console.log(data)
+            try {
+              rresponses = await axios.post('http://localhost/api/retrievePosts.php', data, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+              // console.log(rresponses.data)
+              if(rresponses.data.length>0)
+                {
+                  rresponses.data.map((item,index)=>{
+                    let table = [item.num_of_likes,index]
+                    // console.log(table)
+                    setLikes((prevState) => [...prevState, table]);
+                  })
+                  // console.log(rresponses.data)
+                  setRess(rresponses.data)
+                  // console.log(rresponses.data)
+                  setCheckNewComments(rresponses.data)
+                  // console.log(rresponses.data)
+                  // document.body.click();
+                }
+                // console.log(ress)
+              } catch (error) {
+              console.error('Error:', error);
+            }
+          })();
+      }, []);
     const getUserData = async (username) => {
   
       const data = { input: username }; 
@@ -297,7 +674,7 @@ function Profile() {
             'Content-Type': 'application/json',
           },
         });
-        
+        console.log(rs)
         setFormData(prevState => ({
           ...prevState,
           older: rs.data.image
@@ -356,77 +733,7 @@ function Profile() {
       }
      
     };
-    const getUserDataa = async (username) => {
-  
-        const data = { email: localStorage.getItem("email") , input: username }; 
-        try {
-          res = await axios.post('http://localhost/api/getUserData.php', data, {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          // console.log(res)
-          setFormDataa(prevState => ({
-            ...prevState,
-            older: res.data.response.image
-          }));
-          res.data.followers.map(async (follower)=>{
-            let sa = 0
-            const da = { email: localStorage.getItem("email") ,id:follower.id }; 
-            try {
-              sa = await axios.post('http://localhost/api/checkFollow.php', da, {
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              });
-              // console.log(s.data)
-            } catch (error) {
-              console.error('Error:', error);
-            }
-        // console.log(sa)
-        follower.ok = sa.data
-          })
-
-          res.data.following.map(async (follower)=>{
-            let sad = 0
-            const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
-            try {
-              sad = await axios.post('http://localhost/api/checkFollow.php', dad, {
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              });
-              // console.log(s.data)
-            } catch (error) {
-              console.error('Error:', error);
-            }
-        // console.log(sa)
-        follower.ok = sad.data
-          })
-          
-          // for (let follower in ) {
-              
-          
-          if(res.data.image){
-            setGood4(true)
-            setImage2(false)
-          }
-          
-          setFormDataa(prevState => ({
-            ...prevState,
-            e_maila: res.data.response.email,
-            firstNamea: res.data.response.first_name,
-            gendera: res.data.response.gender,
-            lastNamea: res.data.response.last_name,
-            usernamea: res.data.response.username,
-            ida:res.data.response.id,
-            imagea:res.data.response.image
-          }));
-        } catch (error) {
-          console.error('Error:', error);
-        }
-       
-      };
+    
     
     const [style1,setStyle1] = useState(null)
     const [style2,setStyle2] = useState(null)
@@ -478,7 +785,7 @@ function Profile() {
       }
     };
     const handleFileChange2 = (event) => {
-      setProfile(true)
+      setProfile(!profile)
       // setFile2(event.target.files[0]);
       const file2 = event.target.files[0];
       setFormData(prevState => ({
@@ -533,6 +840,7 @@ function Profile() {
         setStyle1(closed)
         setStyle2(closed)
         setVisibleOverlay(false)
+        document.body.style.overflow = "unset"
 
 
     }
@@ -540,14 +848,23 @@ function Profile() {
         setStyle2(closed)
         setStyle1(closed)
         setVisibleOverlay(false)
+        document.body.style.overflow = "unset"
         // console.log(22)
     }
-    const openNav1 = ()=>{
+    const openNav1 = async ()=>{
         setStyle1(opened)
         setStyle2(closed)
         setVisibleOverlay(true)
-
-
+        document.body.style.overflow = "hidden"
+        try {
+            await axios.get('http://localhost/api/removeFlagOne.php', {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+        } catch (error) {
+          console.error('Error:', error);
+        }
     }
     const openPost = ()=>{
       setVis(!vis)
@@ -559,8 +876,9 @@ function Profile() {
       setVisibleOverlay(true)
       if(newMessagess && newMessagess.data.length!==0)
         window.location.href = `#${newMessagess.data[newMessagess.data.length-1].id}`
-
      }
+
+
      const openFollowers = ()=>{
       setFollowers(!followers)
       setVisibleOverlay(true)
@@ -651,7 +969,7 @@ function Profile() {
         setStyle2(opened)
         setStyle1(closed)
         setVisibleOverlay(true)
-
+        document.body.style.overflow = "hidden"
     }
     const handleUpdate = async () => {
       
@@ -712,7 +1030,44 @@ function Profile() {
       })();
 
       const handleClickOutside = (event) => {
+        let commentsBox = document.querySelectorAll('.allp') 
+        
+        commentsBox.forEach((element) => {
+          // console.log(element,)
+          if(element.style.display == 'flex' && event.target.parentElement.parentElement.parentElement!==element && event.target.parentElement.parentElement.parentElement.parentElement!==element && event.target.tagName !== 'SPAN'){
+            // console.log('ok')
+            // console.log(event.target)
+            element.style.display = 'none'
+            setVisibleOverlay(false)
+          }
+        });
         // console.log(event.target)
+        if(event.target.classList.value=='overlay' || popup2.current && !popup2.current.contains(event.target)){
+          setVisibleOverlay(false)
+        }
+        if(event.target.classList.value=='overlay' || popup2344.current && !popup2344.current.contains(event.target)){
+          setVisibleOverlay(false)
+        }
+        const elements = document.querySelectorAll('.dropdown-conten');
+        
+      //   likesElemeents = document.querySelectorAll('[class*="likes"]') 
+      //   // console.log(event.target.classList.value)
+      //   if(event.target.classList.value!=='slikes'){
+      //   likesElemeents.forEach((element) => {
+      //     if(element.style.display !== 'none' && element.id===event.target.id && !element.contains(event.target)){
+      //       closeLikes(element.id)
+      //     }
+      //   }); 
+      // }
+       
+        elements.forEach((element) => {
+          if(!regex.test(event.target.id) && event.target!=element.previousElementSibling){
+            element.style.display = 'none';
+          }
+          if((!regex.test(event.target.id) && event.target.id && event.target.nextElementSibling && event.target.id.slice(2)!=event.target.nextElementSibling.id)){
+            element.style.display = 'none';
+          }
+        }); 
         if(!closeBtnSidenave2.current.contains(event.target) && sidenave2.current.contains(event.target)){
           closeNav2()
         }
@@ -891,21 +1246,21 @@ function Profile() {
         
           }
           if(popup4.current && popup4.current!==event.target && event.target===op.current){
-            setProfile(true)
+            setProfile(!profile)
             setEditTrue(false)
-            setEdtTrue(false)
+            setEdtTrue(!edt)
             upsd.current.style.display='none'
           }
           if(popup90.current && popup90.current!==event.target && event.target===op.current){
-            setProfile(true)
+            setProfile(!profile)
             setEditTrue(false)
-            setEdtTrue(false)
+            setEdtTrue(!edt)
             upsd.current.style.display='none'
           }
           if(popup.current && popup.current!==event.target && event.target===op.current){
-            setProfile(true)
+            setProfile(!profile)
             setEditTrue(false)
-            setEdtTrue(false)
+            setEdtTrue(!edt)
             upsd.current.style.display='none'
           }
           if (popup2.current && !popup2.current.contains(event.target)) {
@@ -966,17 +1321,17 @@ function Profile() {
             if(event.target===ups.current){
               upsd.current.style.display='none'
               setEditTrue(true)
-              setEdtTrue(false)
+              setEdtTrue(!edt)
               // setProfile(false)
               setProfile2(false);
             }else {
               if(popup90.current && popup90.current!==event.target && event.target!==log.current && !log.current.contains(event.target)){
                 if(event.target===upps.current ){
                   setProfile2(true)
-                  setProfile(false)
+                  setProfile(!profile)
 
                   setEditTrue(false)
-                  setEdtTrue(false)
+                  setEdtTrue(!edt)
                   upsd.current.style.display='none'
                 }
               }
@@ -1000,17 +1355,17 @@ upsd.current.style.display='none'
             if(event.target===ups.current){
               upsd.current.style.display='none'
               setEditTrue(true)
-              setEdtTrue(false)
+              setEdtTrue(!edt)
               // setProfile(false)
               setProfile2(false);
             }else {
               if(popup4.current && popup4.current!==event.target && event.target!==log.current && !log.current.contains(event.target)){
                 if(event.target===upps.current ){
                   setProfile2(true)
-                  setProfile(false)
+                  setProfile(!profile)
 
                   setEditTrue(false)
-                  setEdtTrue(false)
+                  setEdtTrue(!edt)
                   upsd.current.style.display='none'
                 }
               }
@@ -1033,17 +1388,17 @@ upsd.current.style.display='none'
             if(event.target===ups.current){
               upsd.current.style.display='none'
               setEditTrue(true)
-              setEdtTrue(false)
+              setEdtTrue(!edt)
               // setProfile(false)
               setProfile2(false);
             }else {
               if(popup.current && popup.current!==event.target && event.target!==log.current && !log.current.contains(event.target)){
                 if(event.target===upps.current ){
                   setProfile2(true)
-                  setProfile(false)
+                  setProfile(!profile)
 
                   setEditTrue(false)
-                  setEdtTrue(false)
+                  setEdtTrue(!edt)
                   upsd.current.style.display='none'
                 }
               }
@@ -1058,6 +1413,9 @@ upsd.current.style.display='block'
 upsd.current.style.display='none'
 }
             }
+          }
+          if(!closeBtnSidenave1.current.contains(event.target) && sidenave1.current.contains(event.target)){
+            openNav1()
           }
         };
   
@@ -1160,12 +1518,44 @@ upsd.current.style.display='none'
       }
     
     }, [username]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // Fetch user data
+          const res = await getUserDataa(localStorage.getItem("email"));
+          const data = { 
+            email: localStorage.getItem("email"), 
+            id: res.data.response.id 
+          };
+  
+          // Fetch notifications
+          const notigp = await axios.post('http://localhost/api/getNotifications.php', data, {
+            headers: { 'Content-Type': 'application/json' }
+          });
+  
+          console.log('Notifications response:', notigp.data);
+  
+          // Set notifications state
+          setNotig(notigp.data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+  
+      fetchData();
+    }, []); // Empty dependency array ensures this runs once when the component mounts
     
+    useEffect(() => {
+        setTrigger(!trigger);
+        // console.log(11)
+        // loader = !loader
+        setContentt("")
+      }, [checkNewComments]);
   return (
     <>
     {visibleOverlay && <div className="overlay"></div>}
     <header id="section1">
-        <div><Link to="/feed"><img id="logo" src={Logo} alt="logo"/></Link></div>
+        <div><Link to="/feed"><span id="logo">soc-net</span></Link></div>
         <div id="second">
         <div className="dropdown">
                   <input value={user} onChange={handle} onClick={()=>{search.current.style.display='block'}} type="text" placeholder='looking for someone...'/>
@@ -1197,7 +1587,7 @@ upsd.current.style.display='none'
                       />}
                       {item.image===null && <i id="profile10" className="dropbtn fa-solid fa-user"></i>}
                       <div style={{overflow:'hidden',display:'flex',flexDirection:'column'}}>
-                      <Link style={{color:"black"}} onClick={()=>{setProfile(true);setProfile2(false);setEditTrue(false);search.current.style.display='none'}} to={`/profile?username=${item.username}`}><span style={{display:'inline-block',fontWeight:'500',fontSize:'0.8em'}}>{item.first_name} {item.last_name}</span></Link>
+                      <Link style={{color:"black"}} onClick={()=>{setProfile(!profile);setProfile2(false);setEditTrue(false);search.current.style.display='none'}} to={`/profile?username=${item.username}`}><span style={{display:'inline-block',fontWeight:'500',fontSize:'0.8em'}}>{item.first_name} {item.last_name}</span></Link>
                       <span style={{cursor:'initial',color:'rgba(0,0,0,0.5'}}>@{item.username}</span>
           
                     </div>
@@ -1212,8 +1602,14 @@ upsd.current.style.display='none'
         <nav>
             <Link to='/feed'><i className="fa-solid fa-house"></i></Link>
             <i onClick={openPost} className="fa-solid fa-circle-plus"></i>
+            <div style={{display:'inline-block',position:'relative'}}>
+            {notig!==null && notig.cou > 0 ? <div style={{borderRadius:'50%',backgroundColor:'red',width:'10px',height:'10px',position:'absolute',left:'30px',top:'16px'}}></div>:""}
             <i onClick={openNav1} className="fa-solid fa-bell"></i>
-            <i onClick={openNav2} className="fa-solid fa-message"></i>
+            </div>
+            <div style={{display:'inline-block',position:'relative'}}>
+              {notgpv!==null && notgpv.cou>0 ? <div style={{borderRadius:'50%',backgroundColor:'red',width:'10px',height:'10px',position:'absolute',left:'30px',top:'16px'}}></div>:""}
+              <i onClick={openNav2} className="fa-solid fa-message"></i>
+            </div>
             <div className="dropdown">
             {!image2 && formData.image && <img ref={popup4}
             src={`http://localhost/uploads/${formData.image}`} 
@@ -1230,8 +1626,8 @@ upsd.current.style.display='none'
           
                 {!formData.image && <i ref={popup} id="profile" className="dropbtn fa-solid fa-user"></i>}
                 {true && <div ref={upsd} style={{display:'none'}} className="dropdown-content">
-                    <div ref={upps} onClick={() => {setProfile2(true);setEdtTrue(false)}}><i className="fa-solid fa-address-book"></i>My Profile</div>               
-                    <div ref={ups}  onClick={() => {setProfile2(false);setEditTrue(!edit)}}><i className="fa-solid fa-pen-to-square"></i>Edit Profile</div>
+                    <div ref={upps} onClick={() => {setProfile(!profile);setEdtTrue(!edt);}}><i className="fa-solid fa-address-book"></i>My Profile</div>               
+                    <div ref={ups}  onClick={() => {setProfile2(!profile2);setEditTrue(!edit)}}><i className="fa-solid fa-pen-to-square"></i>Edit Profile</div>
                     <hr/>
                     <Link ref={log} style={{color:'black'}} to='/'><div><i className="fa-solid fa-right-from-bracket"></i>Logout</div></Link>
                 </div>}
@@ -1243,10 +1639,73 @@ upsd.current.style.display='none'
     <div ref={sidenave1} style={style1} className="sidenav">
     <a ref={closeBtnSidenave1} className="closebtn" onClick={closeNav1}>&times;</a>
     <h1>Notifications</h1>
+    {notig != null && Array.isArray(notig.notifications) && notig.notifications.map((item, index) => {
+  return (
+    <div key={index} style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{display: 'flex',alignItems:'center',marginLeft:'20px'}}>
+        {/* Display the profile image */}
+        
+        {item.profile_pic == null ? 
+  <i id="profile11" className="dropbtn fa-solid fa-user"></i> :
+  <img style={{
+    marginLeft: '1px',
+    marginBottom: '6px',
+    maxWidth: '100%',
+    marginRight: '5px',
+    height: '35px',
+    width: '35px',
+    verticalAlign: 'middle',
+    borderRadius: '50%'
+}} src={`http://localhost/${item.profile_pic}`} alt="Profile" />
+}
+
+        <div>
+          <Link style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em'}} to={`/profile?username=${item.username}`}><p style={{fontWeight:'500'}}>{item.name}</p></Link> 
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>@{item.username} {item.texte} !</p>
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
+        </div>
+        {
+          item.flag == 1 && <div style={{borderRadius:'50%',backgroundColor:'rgba(0,0,255,0.6)',width:'10px',height:'10px',position:'relative',left:'10px'}}></div>
+        }
+      </div>
+      <hr/>
+    </div>
+  );
+})}
   </div>
   <div ref={sidenave2} style={style2} className="sidenav">
     <a ref={closeBtnSidenave2} className="closebtn" onClick={closeNav2}>&times;</a>
     <h1>Messages</h1>
+    {notgpv != null && Array.isArray(notgpv.notifications) && notgpv.notifications.map((item, index) => {
+  return (
+    <div key={index} style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{position:'relative',display: 'flex',alignItems:'center',marginLeft:'20px'}}>
+          {item.profile_pic == null ? 
+          <i id="profile11" className="dropbtn fa-solid fa-user"></i> :
+          <img style={{
+            marginLeft: '1px',
+            marginBottom: '6px',
+            maxWidth: '100%',
+            marginRight: '5px',
+            height: '35px',
+            width: '35px',
+            verticalAlign: 'middle',
+            borderRadius: '50%'
+        }} src={`http://localhost/${item.profile_pic}`} alt="Profile" />
+        }
+        <div>
+          <p onClick={()=>openPost2(item.username)} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
+          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
+        </div>
+        {
+          item.flag == 1 && <div style={{borderRadius:'50%',backgroundColor:'rgba(0,0,255,0.6)',width:'10px',height:'10px',position:'relative',left:'40px'}}></div>
+        }
+      </div>
+      <hr/>
+    </div>
+  );
+})}
   </div>
   {edit && <div id="edit">
 
@@ -1293,7 +1752,7 @@ upsd.current.style.display='none'
             <a href='#section1'><button onClick={handleUpdate} style={{padding:'7px',fontSize:'1.1em',outine:'none',border:'none',borderRadius:'5px',margin:'20px 10px 0px 20px',color:'white',backgroundColor:'#0b5ed7'}}>Update Profile</button></a>
 </div>}
   {vis && <div className='all'>
-  <div ref={popup2} className="post">
+  <div ref={popup2} className="postp">
     <div style={{marginBottom:'20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
       <h3>Add New Post</h3>
       <i id="close" onClick={closePost} className="fa-solid fa-x"></i>
@@ -1318,8 +1777,8 @@ upsd.current.style.display='none'
   </div>
   </div>}
   
-    {!edit && !profile2 && profile && <div style={{margin:'60px',width:'80%',textAlign:'center'}}>
-      <div style={{display:'flex',justifyContent:'center',alignItems:'flex-start'}}>
+    {!edit && !profile2 && profile && <div id="kol">
+      <div id="pol">
 
       {!image2 && formDataa.imagea && (<img 
             src={`http://localhost/${formDataa.imagea}`} 
@@ -1332,20 +1791,19 @@ upsd.current.style.display='none'
             id="image30" 
           />)}
           {!formDataa.imagea && <i id="profile30" style={{marginRight:'15px'}} className="dropbtn fa-solid fa-user"></i>}
-        <div style={{marginLeft:'60px',display:'flex',flexDirection:'column',alignItems:'flex-start'}}>
+        <div id="alg">
           <div style={{display:'flex',width:'100%',justifyContent:'space-between',alignItems:'center'}}><span style={{fontSize:'2em'}}>{formDataa.firstNamea} {formDataa.lastNamea}</span>
 
 
           <div style={{position:'relative',display:'flex',flexDirection:'column'}}>{res && res.data.response.blocked2===0 && rs && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && <i onClick={()=>setDrop(!drop)} ref={dr} style={{fontSize:'2em'}} className="fa-solid fa-ellipsis"></i>}
-          {drop && <div ref={dro} style={{position:'absolute',top:'35px'}} className="dropdown-contenp">
+          {drop && <div ref={dro} className="dropdown-contenp">
                     <div onClick={()=>{openPost2();setDrop(false);}}><i className="fa-solid fa-message"></i><span>Message</span></div>               
                     <div onClick={()=>block()}><i style={{marginLeft:'4px',display:'inline-block'}} className="fa-solid fa-x"></i><span>Block</span></div>
                 </div>}</div>
           </div>
           <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formDataa.usernamea}</span>
-          {res && res.data.response.blocked2===0 && res.data.response.blocked!==1 && <div style={{marginTop:'20px'}}>
-
-          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>0 Posts</button>
+          {res && res.data.response.blocked2===0 && res.data.response.blocked!==1 && <div id="manque">
+    <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{res && res.data.response.n_posts} Posts</button>
           <button onClick={()=>{openFollowers();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{res && res.data.response.num_of_followers} Followers</button>
           <button onClick={()=>{openFollowing();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{res && res.data.response.num_of_following} Following</button>
           </div>}
@@ -1387,7 +1845,7 @@ upsd.current.style.display='none'
           <span style={{fontSize:'2em'}}>{formData.firstName} {formData.lastName}</span>
           <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formData.username}</span>
           <div style={{marginTop:'20px'}}>
-          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>0 Posts</button>
+          <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{rs && rs.data.response.n_posts} {res && res.data.response.n_posts} Posts</button>
           <button onClick={()=>{openFollowers2();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{rs && rs.data.response.num_of_followers} Followers</button>
           <button onClick={()=>{openFollowing2();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{rs && rs.data.response.num_of_following} Following</button>
 
@@ -1442,7 +1900,7 @@ upsd.current.style.display='none'
   </div>}
 
   {followers && <div className='all'>
-  <div ref={popup234} className="post">
+  <div ref={popup234} className="postp">
     <div style={{marginBottom:'20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
       <h3>Followers</h3>
       <i id="close" onClick={closePost23} className="fa-solid fa-x"></i>
@@ -1494,7 +1952,7 @@ upsd.current.style.display='none'
   </div>}
 
   {following && <div className='all'>
-  <div ref={popup2344} className="post">
+  <div ref={popup2344} className="postp">
     <div style={{marginBottom:'20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
       <h3>Following</h3>
       <i id="close" onClick={closePost234} className="fa-solid fa-x"></i>
@@ -1551,7 +2009,7 @@ upsd.current.style.display='none'
 
 
   {followers2 && <div className='all'>
-  <div ref={popup2342} className="post">
+  <div ref={popup2342} className="postp">
     <div style={{marginBottom:'20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
       <h3>Followers</h3>
       <i id="close" onClick={closePost232} className="fa-solid fa-x"></i>
@@ -1584,7 +2042,7 @@ upsd.current.style.display='none'
         )}
         <div style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               
-              <Link style={{ color: 'black' }} onClick={()=>{setProfile2(false);setProfile(true);setFollowers2(false);setVisibleOverlay(false);}} to={`/profile?username=${item.username}`}>
+              <Link style={{ color: 'black' }} onClick={()=>{setProfile2(false);setProfile(!profile);setFollowers2(false);setVisibleOverlay(false);}} to={`/profile?username=${item.username}`}>
             <span style={{ display: 'inline-block', fontWeight: '500' }}>
               {item.first_name} {item.last_name}
             </span>
@@ -1605,7 +2063,7 @@ upsd.current.style.display='none'
   </div>}
 
   {following2 && <div className='all'>
-  <div ref={popup23442} className="post">
+  <div ref={popup23442} className="postp">
     <div style={{marginBottom:'20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
       <h3>Following</h3>
       <i id="close" onClick={closePost2342} className="fa-solid fa-x"></i>
@@ -1637,7 +2095,7 @@ upsd.current.style.display='none'
           <i id="profile10" className="dropbtn fa-solid fa-user"></i>
         )}
         <div style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          <Link style={{ color: 'black' }} onClick={()=>{setProfile2(false);setProfile(true);setFollowers2(false);setFollowing2(false);setVisibleOverlay(false);}} to={`/profile?username=${item.username}`}>
+          <Link style={{ color: 'black' }} onClick={()=>{setProfile2(false);setProfile(!profile);setFollowers2(false);setFollowing2(false);setVisibleOverlay(false);}} to={`/profile?username=${item.username}`}>
             <span style={{ display: 'inline-block', fontWeight: '500' }}>
               {item.first_name} {item.last_name}
             </span>
@@ -1658,7 +2116,141 @@ upsd.current.style.display='none'
   </div>
   </div>}
 
+  {<div style={{textAlign:'center',marginBottom:'20px'}}>
+        <h1>Posts</h1>
+        
+        {(res && res.data.response.blocked2===0 && res.data.response.blocked!==0) ? <p style={{width:'70%',margin:'auto',padding:'15px',backgroundColor:'rgba(0,0,0,0.2)'}}><i style={{marginRight:'10px',color:'#FFF',borderRadius:'50%',padding:'10px',backgroundColor:'rgba(0,0,0,0.7)'}} className="fa-solid fa-x"></i>You are not allowed to see posts !</p> :
+        <div style={{textAlign:'center',display:'flex',width:'70%',margin:'auto'}}>
+        {redss!==null && redss.length!=0 ? redss.map((item, index) => {
+      return (
+          <div id={`sen_${item.id_post}`} className="edcctp" key={index}>
+            
+            <img 
+                onClick={()=>openComments(item.id_post)}
+                src={`http://localhost/${item.photo}`} 
+                alt="Preview" 
+                style={{
+                    // marginLeft: '1px',
+                    marginBottom: '6px',
+                    maxWidth: '100%',
+                    marginRight: '15px',
+                    display:'inline-block',
+                    height: '200px',
+                    width: '300px',
+                    verticalAlign: 'middle',
+                }} 
+            />
+            
+          </div>
+      );
+  }):<p style={{width:'70%',margin:'auto',padding:'15px',backgroundColor:'rgba(0,0,0,0.2)'}}><i style={{marginRight:'10px',color:'#FFF',borderRadius:'50%',padding:'10px',backgroundColor:'rgba(0,0,0,0.7)'}} className="fa-solid fa-x"></i>You don't have any post</p>}  </div>}</div>}
+  {redss!==null && redss.length!=0 && redss.map((item,index)=>{
+          return(
+            <div style={{display:'none'}} className={`allp comments boxC_${item.id_post}`} key={item.id_post}>
+                <div className='postg'>
+                  <div style={{width: '65%', height: '100%', overflow: 'hidden', position: 'relative'}}><img style={{width: '100%', height: '100%', position: 'absolute'}} src={`http://localhost/${item.photo}`}/></div>
+                  <div style={{width:'35%',height: '100%',backgroundColor:'white',padding:'10px'}}>
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                      <div style={{display:'flex',alignItems:'center'}}>
+                      {item.profile_pic==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
+            {item.profile_pic!=null && <img 
+                src={`http://localhost/${item.profile_pic}`} 
+                alt="Preview" 
+                style={{
+                    marginLeft: '1px',
+                    marginBottom: '6px',
+                    maxWidth: '100%',
+                    marginRight: '5px',
+                    height: '55px',
+                    width: '55px',
+                    verticalAlign: 'middle',
+                    borderRadius: '50%'
+                }} 
+            />}
+                        <div style={{marginLeft:'10px',display:'flex',flexDirection:'column'}}>
+                          <span style={{fontWeight:'500',fontSize:'1em'}}>{item.first_name} {item.last_name}</span>
+                          <span style={{color:'rgba(0,0,0,0.5)',fontWeight:'500',fontSize:'1em'}}>@{item.username}</span>
+                        </div>
+                      </div>
+                      <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end'}}>
+                        <span>{item.num_of_likes} likes</span>
+                        <span style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em'}}>{item.formatted_time}</span>
+                      </div>
+                    </div>
 
+                    <div>
+
+                    </div>
+                    <hr style={{opacity:'0.5',width:'100%'}}/>
+                    <div style={{display:'flex',flexDirection:'column',maxHeight:'100%',height:'76%',overflowY:'scroll'}}>
+{/* {isArrayOfArrays(checkNewComments)? checkNewComments[index] && checkNewComments[index].length!==0 && checkNewComments[index].map((itm,index)=>{
+return(
+  <>
+                      <div key={index} id={index} style={{display:'flex'}}>
+                      {itm.image==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
+            {itm.image!=null && <img 
+                src={`http://localhost/${itm.image}`} 
+                alt="Preview" 
+                style={{
+                    marginLeft: '1px',
+                    marginBottom: '6px',
+                    maxWidth: '100%',
+                    marginRight: '5px',
+                    height: '45px',
+                    width: '45px',
+                    verticalAlign: 'middle',
+                    borderRadius: '50%'
+                }} 
+            />}
+                        <div style={{marginLeft:'10px'}}>
+                          <span style={{fontWeight:'700',color:'rgba(0,0,0,0.5)'}}>@{itm.username}</span> - <span style={{fontWeight:'500',fontSize:'0.9em'}}>{itm.content}</span><br/>
+                          <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.5)'}}>({itm.formatted_time})</span>
+                        </div>
+                      </div>
+                      </>
+)}
+) 
+:checkNewComments.data && checkNewComments.data.length!==0 && checkNewComments.data.map((itm,index)=>{
+  return(
+    <>
+                        <div key={index} id={index} style={{display:'flex'}}>
+                        {itm.image==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
+              {itm.image!=null && <img 
+                  src={`http://localhost/${itm.image}`} 
+                  alt="Preview" 
+                  style={{
+                      marginLeft: '1px',
+                      marginBottom: '6px',
+                      maxWidth: '100%',
+                      marginRight: '5px',
+                      height: '45px',
+                      width: '45px',
+                      verticalAlign: 'middle',
+                      borderRadius: '50%'
+                  }} 
+              />}
+                          <div style={{marginLeft:'10px'}}>
+                            <span style={{fontWeight:'700',color:'rgba(0,0,0,0.5)'}}>@{itm.username}</span> - <span style={{fontWeight:'500',fontSize:'0.9em'}}>{itm.content}</span><br/>
+                            <span style={{fontSize:'0.8em',color:'rgba(0,0,0,0.5)'}}>({itm.formatted_time})</span>
+                          </div>
+                        </div>
+                        </>
+  )}
+  ) 
+  } */}
+       <Comments trigger={trigger} checkNewComments={checkNewComments} />
+
+                    </div>
+                    <hr style={{opacity:'0.5',width:'100%'}}/>
+                    <div style={{marginBottom:'10px',width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
+                        <input placeholder='say something...' type="text" className="sayy"/>
+                      <button onClick={(e)=>{postComment(item.id_post,e.target.previousElementSibling.value,item.id);e.target.previousElementSibling.value="";}} className={`send_${item.id_post}`} type="submit">Post</button>
+                    </div>
+                  </div>
+                </div>
+            </div> 
+          );
+         }) }
   </>
   )
 }

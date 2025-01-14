@@ -37,6 +37,7 @@ const Comments = ({ checkNewComments }) => {
         </div>
       ))
     }
+    
     </>
   );
 };

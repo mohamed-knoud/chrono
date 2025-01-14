@@ -4,7 +4,7 @@ header{
     display: flex;
     justify-content: space-between;
     background-color: #fff;
-    padding: 15px 0;
+    /* padding: 15px 0; */
     align-items: center;
     z-index: -20;
     margin-bottom:20px;
@@ -27,6 +27,18 @@ width: 85%;
     justify-content: space-between;
     align-items: center;
     margin-right: 100px;
+}
+
+
+
+.post{
+  overflow-y:hidden;
+  overflow-x:hidden;
+  height:90vh;
+}
+.postp{
+  overflow-y:hidden;
+  overflow-x:hidden;
 }
 [class^="send"]{
 border:none;
@@ -55,6 +67,11 @@ nav i{
 
 #logo{
     margin-left: 100px;
+    width:150px;
+    height: auto;
+    font-size:1.9em;
+    color:black;
+    font-family: "Rubik Vinyl", serif;
 }
 
 #profile{
@@ -299,7 +316,7 @@ nav i{
     display: flex;
   }
 
-  .post{
+  .post,.postp{
     width:35%;
     margin: auto;
     border-radius: 5px;
@@ -415,6 +432,8 @@ button.follo{
 .dropdown-contenp {
   position:absolute;
   top:15px;
+  position:absolute;
+  top:35px;
   background-color: #fff;
   overflow: auto;
   z-index: 1;
@@ -524,4 +543,110 @@ button.unblock{
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.senegal{
+  width:35%;
+  height:100%;
+  background-color:white;
+  padding:10px;
+}
+.maroc img{
+  width: 100%; 
+  min-height: 100%; 
+  position: absolute;
+}
+#kol{
+  margin:60px;
+  width:80%;
+  text-align:center;
+}
+#pol{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+#alg{
+  margin-left:60px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+#manque{
+  margin-top:20px;
+}
+@media only screen and (max-width: 400px) {
+  .dropdown-contenp{
+    top:30px;
+    right:-30px;
+  }
+  #manque{
+    display: flex;
+  }
+  #alg{
+    display:flex;
+    flex-direction:column;
+    margin-left: 0;
+    margin-top: 10px;
+    align-items:flex-start;
+  }
+  #pol{
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+  }
+  #kol{
+    margin: auto;
+  }
+  #put{
+    width:90%;
+  }
+  .maroc{
+    width:100%;
+  }
+  .postg{
+    width:95%;
+    flex-direction: column;
+  }
+  .senegal{
+    width:100%;
+    height:100%;
+    background-color:white;
+    padding:10px;
+  }
+  .edcct{
+    width:100%;
+  }
+  #follow{
+    display: none;
+    background-color: red;
+  }
+  #navi{
+    display: flex;
+    align-items: center;
+  }
+  #post,.post,.postp{
+    width:90%;
+  }
+  /* .dropdown-contentt{
+    left:75px;
+  } */
+  header{
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  /* .dropdown{
+    width:100%;
+  } */
+  #second{
+    width: 100%;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    margin: auto;
+  }
+
+  #section1{
+    text-align: center;
+    width:100%;
+  }
 }
