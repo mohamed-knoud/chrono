@@ -229,6 +229,7 @@ function Header() {
           'Content-Type': 'application/json',
         },
       });
+      console.log(like)
       // if(like.data===1){
       //   window.location.href = `#comment_${id}`
       //   window.location.reload();
