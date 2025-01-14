@@ -1830,37 +1830,7 @@ upsd.current.style.display='none'
         </div>
         </div>
       </div> }
-      // {!edit && !profile && profile2 && <div style={{margin:'60px',width:'80%',textAlign:'center'}}>
-      // <div style={{display:'flex',justifyContent:'center',alignItems:'flex-start'}}>
-
-      // {!image2 && formData.image && (<img 
-      //       src={`https://soc-net.info/api/${formData.image}`} 
-      //       alt="Preview" 
-      //       id="image30" 
-      //     />)}
-      //     {image2 && (<img 
-      //       src={image2} 
-      //       alt="Preview" 
-      //       id="image30" 
-      //     />)}
-      //     {!formData.image && <i id="profile30" style={{marginRight:'15px'}} className="dropbtn fa-solid fa-user"></i>}
-      //   <div style={{marginLeft:'60px',display:'flex',flexDirection:'column',alignItems:'flex-start'}}>
-      //     <span style={{fontSize:'2em'}}>{formData.firstName} {formData.lastName}</span>
-      //     <span style={{marginTop:'10px',fontSize:'1.1em',opacity:'0.6'}}>@{formData.username}</span>
-      //     <div style={{marginTop:'20px'}}>
-      //     <button className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-signs-post"></i>{res && res.data.response.n_posts} Posts</button>
-      //     <button onClick={()=>{openFollowers2();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-people-arrows"></i>{rs && rs.data.response.num_of_followers} Followers</button>
-      //     <button onClick={()=>{openFollowing2();}} className='follo'><i style={{marginRight:'5px'}} className="fa-solid fa-address-book"></i>{rs && rs.data.response.num_of_following} Following</button>
-
-      //     </div>
-      //   </div>
-      // </div>
-  
-  
-  
       
-
-      // </div>}
 
 
       {viss && <div ref={po} className='all'>
