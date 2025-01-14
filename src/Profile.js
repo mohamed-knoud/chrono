@@ -2154,7 +2154,7 @@ upsd.current.style.display='none'
                       <div style={{display:'flex',alignItems:'center'}}>
                       {item.profile_pic==null && <i id="profile111" className="dropbtn fa-solid fa-user"></i>}
             {item.profile_pic!=null && <img 
-                src={`https://soc-net.info/${item.profile_pic}`} 
+                src={`https://soc-net.info/api/${item.profile_pic}`} 
                 alt="Preview" 
                 style={{
                     marginLeft: '1px',
