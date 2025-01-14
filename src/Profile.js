@@ -1831,7 +1831,7 @@ upsd.current.style.display='none'
       <div style={{display:'flex',justifyContent:'center',alignItems:'flex-start'}}>
 
       {!image2 && formData.image && (<img 
-            src={`https://soc-net.info/${formData.image}`} 
+            src={`https://soc-net.info/api/${formData.image}`} 
             alt="Preview" 
             id="image30" 
           />)}
