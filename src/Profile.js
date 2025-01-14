@@ -1574,7 +1574,7 @@ upsd.current.style.display='none'
                   <div style={{display:'flex',marginBottom:'10px',justifyContent:'space-between'}} key={index}>
                     <div style={{display:'flex'}}>
                       {item.image!==null && <img 
-                          src={`https://soc-net.info/${item.image}`} 
+                          src={`https://soc-net.info/api/${item.image}`} 
                           alt="Preview" 
                           style={{
                               marginLeft: '1px',
