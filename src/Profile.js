@@ -1727,7 +1727,7 @@ upsd.current.style.display='none'
       {!image2 && good4 && (
         <div style={{border:'1px solid rgb(200,200,200)',padding:'2px',margin:'30px 20px',width:'150px',height:'auto'}}>
           <img 
-            src={`https://soc-net.info/${formData.image}`} 
+            src={`https://soc-net.info/api/${formData.image}`} 
             alt="Previeww" 
             style={{ maxWidth: '100%', height: 'auto' }} 
           />
