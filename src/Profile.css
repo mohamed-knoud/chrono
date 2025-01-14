@@ -576,7 +576,7 @@ button.unblock{
   margin-top:20px;
 }
 .put{
-    width:90%;
+/*     width:90%; */
     height:auto;
     border:1px solid #ced4da;
     font-size:1.2em;
@@ -584,6 +584,9 @@ button.unblock{
     margin:0 20px 10px; 
   }
 @media only screen and (max-width: 400px) {
+    .put{
+    width:90%; 
+  }
   .dropdown-contenp{
     top:30px;
     right:-30px;
