@@ -229,7 +229,7 @@ function Header() {
           'Content-Type': 'application/json',
         },
       });
-      // console.log(like)
+      console.log(like)
       if(like.data===1){
         window.location.href = `#comment_${id}`
         window.location.reload();
@@ -276,7 +276,7 @@ function Header() {
           'Content-Type': 'application/json',
         },
       });
-      // console.log(like)
+      console.log(like)
       if(like.data===1){
         window.location.href = `?target=send_${id}`
         // console.log('df')
