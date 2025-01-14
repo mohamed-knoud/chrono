@@ -1364,11 +1364,11 @@ upsd.current.style.display='none'
             }else {
               if(popup4.current && popup4.current!==event.target && event.target!==log.current && !log.current.contains(event.target)){
                 if(event.target===upps.current ){
-                  setProfile2(true)
-                  setProfile(!profile)
+                  setProfile2(false)
+                  setProfile(true)
 
                   setEditTrue(false)
-                  setEdtTrue(!edt)
+                  setEdtTrue(false)
                   upsd.current.style.display='none'
                 }
               }
@@ -1397,11 +1397,11 @@ upsd.current.style.display='none'
             }else {
               if(popup.current && popup.current!==event.target && event.target!==log.current && !log.current.contains(event.target)){
                 if(event.target===upps.current ){
-                  setProfile2(true)
-                  setProfile(!profile)
+                  setProfile2(false)
+                  setProfile(true)
 
                   setEditTrue(false)
-                  setEdtTrue(!edt)
+                  setEdtTrue(false)
                   upsd.current.style.display='none'
                 }
               }
