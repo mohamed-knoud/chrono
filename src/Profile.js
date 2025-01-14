@@ -1837,7 +1837,7 @@ upsd.current.style.display='none'
   <div ref={popup23} style={{overflowY:'hidden',overflowX:'hidden',height:'90vh'}} className="post">
   <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
     <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>{formDataa.imagea && (<img 
-            src={`https://soc-net.info/${formDataa.imagea}`} 
+            src={`https://soc-net.info/api/${formDataa.imagea}`} 
             alt="Preview" 
             // id="image30" 
             style={{marginRight:'10px',objectFit: 'cover',width:'45px',height:'45px',borderRadius:'50%'}}
