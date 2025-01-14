@@ -507,6 +507,9 @@ button.unfollo{
   padding:10px;
 }
 @media only screen and (max-width: 400px) {
+    .dropdown-conten{
+        right:5px;
+    }
   #put{
     width:90%;
   }
