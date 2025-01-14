@@ -1330,11 +1330,11 @@ const getUserDataak = async (username) => {
             }else {
               if(popup90.current && popup90.current!==event.target && event.target!==log.current && !log.current.contains(event.target)){
                 if(event.target===upps.current ){
-                  setProfile2(true)
-                  setProfile(!profile)
+                  setProfile2(false)
+                  setProfile(true)
 
                   setEditTrue(false)
-                  setEdtTrue(!edt)
+                  setEdtTrue(false)
                   upsd.current.style.display='none'
                 }
               }
