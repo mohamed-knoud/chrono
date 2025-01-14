@@ -311,7 +311,7 @@ function Header() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        // console.log(responses)
+        console.log(responses)
         if(responses.data.success)
         {
           window.location.reload();
