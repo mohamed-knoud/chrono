@@ -48,7 +48,7 @@ function Home() {
         try {
           // Send formData to PHP backend
           const response = await axios.post('https://soc-net.info/api/auth.php', formData);
-          // console.log('Form data sent successfully:', response.data);
+          console.log('Form data sent successfully:', response.data);
           if(response.data.response2 && response.data.response2.success===0)
             navigate('/verify', { state: { response: response.data, success: 1 } });
           else{
