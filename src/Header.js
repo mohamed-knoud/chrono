@@ -2140,7 +2140,7 @@ up.current.style.display='none'
     {ress!==null && ress.length!=0 && ress.map((item,index) => {
       return (
         <div key={index} id={item.id_post} className={`all likes box_${item.id_post}`} style={{display:'none'}}>
-        <div className={`post`}>
+        <div className={`postp`}>
           <div style={{marginBottom:'20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
             <h3>Likes</h3>
             <i id="cloe" onClick={()=>closeLikes(item.id_post)} className="fa-solid fa-x"></i>
