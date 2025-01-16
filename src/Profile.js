@@ -961,6 +961,7 @@ const getUserDataak = async (username) => {
      }
      const openPost2 = (username)=>{
       setUsername2(username)
+      getUserDataav(username)
       // console.log(username)
       // loader2 = true
       setLoader2(true); // Correct way to update state in React
@@ -1652,7 +1653,7 @@ upsd.current.style.display='none'
       console.log(11)
       if (username!=="") {
       console.log(111)
-      resc = getUserDataav(username)
+      
           
         data = { id_exp: resc.data.response.id, username: username };
           console.log(data)
