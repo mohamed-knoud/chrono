@@ -2060,7 +2060,7 @@ upsd.current.style.display='none'
        {loader2 && <div className="loader"></div>}
       {!loader2 && newMessagess!==null && newMessagess.map((item,index) => {
           return (
-            rs.data.response.id !== item.id_dest ? 
+            rs.data.response.id === item.id_dest ? 
               <div key={index} id={item.id} style={{fontSize:'0.9em',wordWrap:'break-word',alignSelf:'flex-end',width:'60%',color:'white',borderRadius:'5px',margin:'10px 10px',padding:'10px',backgroundColor:'#0c6dfd'}}>
                 <span>{item.content}</span><br/>
                 <span>{item.moment}</span>
