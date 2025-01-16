@@ -1537,7 +1537,7 @@ upsd.current.style.display='none'
             
             if(newMessagess && newMessagess.length!==0)
               {
-                window.location.href = `#${newMessagess.[newMessagess.length-1].id}`
+                window.location.href = `#${newMessagess[newMessagess.length-1].id}`
               }
           } else if (mutation.type === 'attributes') {
               console.log('Attributes changed');
