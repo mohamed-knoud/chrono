@@ -9,7 +9,6 @@ let likesElemeents = null
 let resl = null
 
 let res
-let resc
 let rs = null
 let newMessagess = null
 // let newMessagess2 = null
@@ -26,6 +25,7 @@ function Profile() {
     const [flag,setFlag] = useState(false)
   let [username, setUsername] = useState("");
   let [username2, setUsername2] = useState("");
+  let [resc,setResc] = useState(null)
     
   const [notig, setNotig] = useState(null);
     let [newMessagess, setNewMessagess] = useState([]);
@@ -292,17 +292,16 @@ const getUserDataak = async (username) => {
   
     const data = { email: localStorage.getItem("email") , input: username }; 
     try {
-      resc = await axios.post('https://soc-net.info/api/getUserData.php', data, {
+      const fafa = await axios.post('https://soc-net.info/api/getUserData.php', data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      console.log(resc)
       setFormDataav(prevState => ({
         ...prevState,
         older: resc.data.response.image
       }));
-      resc.data.followers.map(async (follower)=>{
+      fafa.data.followers.map(async (follower)=>{
         let sa = 0
         const da = { email: localStorage.getItem("email") ,id:follower.id }; 
         try {
@@ -319,7 +318,7 @@ const getUserDataak = async (username) => {
     follower.ok = sa.data
       })
 
-      resc.data.following.map(async (follower)=>{
+      fafa.data.following.map(async (follower)=>{
         let sad = 0
         const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
         try {
@@ -339,24 +338,25 @@ const getUserDataak = async (username) => {
       // for (let follower in ) {
           
       
-      if(resc.data.image){
+      if(fafa.data.image){
         setGood4(true)
         setImage2(false)
       }
       
       setFormDataav(prevState => ({
         ...prevState,
-        e_mailav: resc.data.response.email,
-        firstNameav: resc.data.response.first_name,
-        genderav: resc.data.response.gender,
-        lastNameav: resc.data.response.last_name,
-        usernameav: resc.data.response.username,
-        idav:resc.data.response.id,
-        imageav:resc.data.response.image
+        e_mailav: fafa.data.response.email,
+        firstNameav: fafa.data.response.first_name,
+        genderav: fafa.data.response.gender,
+        lastNameav:fafa.data.response.last_name,
+        usernameav: fafa.data.response.username,
+        idav:fafa.data.response.id,
+        imageav:fafa.data.response.image
       }));
     } catch (error) {
       console.error('Error:', error);
     }
+    setResc(fafa)
     return resc;
   };
      const [file, setFile] = useState(null);
@@ -1719,7 +1719,7 @@ upsd.current.style.display='none'
           clearInterval(checkNewMessages2); // Cleanup the interval on component unmount or dependency change
         };
       }
-    }, [username, viss]); 
+    }, [username, viss,resc]); 
     useEffect(() => {
       // if(username!=null){
       //   console.log(username)
