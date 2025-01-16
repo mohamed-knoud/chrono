@@ -292,14 +292,14 @@ const getUserDataak = async (username) => {
   
     const data = { email: localStorage.getItem("email") , input: username }; 
     try {
-      const fafa = await axios.post('https://soc-net.info/api/getUserData.php', data, {
+      let fafa = await axios.post('https://soc-net.info/api/getUserData.php', data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       setFormDataav(prevState => ({
         ...prevState,
-        older: resc.data.response.image
+        older: fafa.data.response.image
       }));
       fafa.data.followers.map(async (follower)=>{
         let sa = 0
