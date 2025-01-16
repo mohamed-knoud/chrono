@@ -1529,23 +1529,23 @@ upsd.current.style.display='none'
       };
     }, []);
     const observer = new MutationObserver((mutationsList, observer) => {
-      mutationsList.forEach(mutation => {
-          // console.log(mutation);
-          // Example: log specific details
-          // console.log(newMessagess)
-          if (mutation.type === 'childList') {
-            
-            if(newMessagess && newMessagess.length!==0)
-              {
-                window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-              }
-          } else if (mutation.type === 'attributes') {
-              console.log('Attributes changed');
-          } else if (mutation.type === 'characterData') {
-              console.log('Text content changed');
-          }
-      });
-  });
+    mutationsList.forEach(mutation => {
+        // console.log(mutation);
+        // Example: log specific details
+        // console.log(newMessagess)
+        if (mutation.type === 'childList') {
+          
+          if(newMessagess && newMessagess.length!==0)
+            {
+              window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+            }
+        } else if (mutation.type === 'attributes') {
+            console.log('Attributes changed');
+        } else if (mutation.type === 'characterData') {
+            console.log('Text content changed');
+        }
+    });
+});
 
   const config = {
       childList: true,
