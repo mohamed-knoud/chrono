@@ -1149,7 +1149,7 @@ const getUserDataak = async (username) => {
     //   });
     //  }
      
-    const openNav2 = ()=>{
+    const openNav2 = async ()=>{
         setStyle2(opened)
         setStyle1(closed)
         setVisibleOverlay(true)
