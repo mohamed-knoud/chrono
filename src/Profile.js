@@ -1302,7 +1302,7 @@ useEffect(() => {
               setStyle1(closed)
               setStyle2(closed)
           if(popup4.current && popup4.current!==event.target && popup23.current && !popup23.current.contains(event.target))
-            {loader2=true;setLoader(true);upsd.current.style.display='none'}
+            {setLoader2(true);setLoader(true);upsd.current.style.display='none'}
           if(popup4.current && popup4.current!==event.target && popup234.current && !popup234.current.contains(event.target))
             upsd.current.style.display='none'
           if(popup4.current && popup4.current!==event.target && popup2344.current && !popup2344.current.contains(event.target))
