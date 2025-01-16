@@ -961,6 +961,7 @@ const getUserDataak = async (username) => {
      }
      const openPost2 = (username)=>{
       setUsername2(username)
+      getUserDataav(username2)
       // console.log(username)
       // loader2 = true
       setLoader2(true); // Correct way to update state in React
@@ -2003,7 +2004,7 @@ upsd.current.style.display='none'
 
           <div style={{position:'relative',display:'flex',flexDirection:'column'}}>{res && res.data.response.blocked2===0 && rs && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && <i onClick={()=>setDrop(!drop)} ref={dr} style={{fontSize:'2em'}} className="fa-solid fa-ellipsis"></i>}
           {drop && <div ref={dro} className="dropdown-contenp">
-                    <div onClick={()=>{openPost2();setDrop(false);}}><i className="fa-solid fa-message"></i><span>Message</span></div>               
+                    <div onClick={()=>{openPost2(res.data.response.username);setDrop(false);}}><i className="fa-solid fa-message"></i><span>Message</span></div>               
                     <div onClick={()=>block()}><i style={{marginLeft:'4px',display:'inline-block'}} className="fa-solid fa-x"></i><span>Block</span></div>
                 </div>}</div>
           </div>
