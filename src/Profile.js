@@ -1651,8 +1651,8 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       // console.log(11)
-      if (rs && username!=="") {
-        data = { id_exp: rs.data.response.id, username: username };
+      if (resc && username!=="") {
+        data = { id_exp: resc.data.response.id, username: username };
           console.log(data)
         if (!loader2 && viss && msg.current) {
           if(newMessagess && newMessagess.length!==0)
