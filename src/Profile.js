@@ -870,15 +870,81 @@ const getUserDataak = async (username) => {
       setVis(!vis)
       setVisibleOverlay(true)
      }
-     const openPost2 = ()=>{
-      loader2 = true
+     const openPost2 = (username)=>{
+      setUsername(username)
+      // console.log(username)
+      // loader2 = true
+      setLoader2(true); // Correct way to update state in React
       setViss(!viss)
       setVisibleOverlay(true)
-      if(newMessagess && newMessagess.data.length!==0)
-        window.location.href = `#${newMessagess.data[newMessagess.data.length-1].id}`
+      if(newMessagess && newMessagess.length!==0){
+        window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+// console.log(11)
+      }
      }
+  const [loader2, setLoader2] = useState(false); // Define loader2 state
 
+useEffect(() => {
+      let data;
+      // console.log(11)
+      if (res && username!=="") {
+        data = { id_exp: res.data.response.id, username: username };
+        if (!loader2 && viss && msg.current) {
+          if(newMessagess && newMessagess.length!==0)
+            {
+              // console.log(111)
+              window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+              loader2=false;
+            }
+        }
+        if (msg.current) {
+          observer.observe(msg.current, config)
+        }
+        const fetch = async () => {
+          try {
+            let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+  
+            // console.log('API Response:', response);
+            newMessagess = newMessagess2.data
+            if (newMessagess) {
+              // console.log('Data exists:', newMessagess);
+              // window.location.href = `#${response.data[response.data.length-1].id}`
+              
+              //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+  
+              if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
+                // console.log('Before updating state:', newMessagess); // Log before state update
+                setNewMessagess(newMessagess); // Update state properly
+              
+                // console.log('State updated:', newMessagess); // Log after state update
+                // if(!isArrayEmpty(newMessagess))X
 
+                  // window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+
+                setLoader2(false);  // Correctly update loader state
+              } else {
+                console.error('Response data is empty or not an array:', response.data);
+              }
+            } else {
+              console.error('API response did not contain expected data:', response);
+            }
+          } catch (error) {
+            console.error('Error occurred during API call:', error);
+          }
+        };
+  
+        // Set an interval to keep fetching new messages
+        checkNewMessages2 = setInterval(fetch, 1000);
+        return () => {
+          clearInterval(checkNewMessages2); // Cleanup the interval on component unmount or dependency change
+        };
+      }
+    }, [username, viss]);
+    
      const openFollowers = ()=>{
       setFollowers(!followers)
       setVisibleOverlay(true)
@@ -906,17 +972,19 @@ const getUserDataak = async (username) => {
         setVis(!vis)
       });
      }  
-     const closePost2 = ()=>{
-      setLoader(true)
-      loader2 = true
-      setVisibleOverlay(false)
-      popup23.current.style.animation = 'fadeOut 0.2s ease'
-      // alert(popup23.current.style.animation)
-      popup23.current.addEventListener('animationend', () => {
-        popup23.current.style.display = 'none'; // Remove the element from the layout after the animation ends
-        setViss(!viss)
-      });
-     }
+      const closePost2 = ()=>{
+    clearInterval(checkNewMessages)
+    setLoader(true)
+    // loader2 = false
+    setLoader2(false); // Correct way to update state in React
+    setVisibleOverlay(false)
+    popup23.current.style.animation = 'fadeOut 0.2s ease'
+    // alert(popup23.current.style.animation)
+    popup23.current.addEventListener('animationend', () => {
+      popup23.current.style.display = 'none'; // Remove the element from the layout after the animation ends
+      setViss(!viss)
+    });
+   }
 
      const closePost23 = ()=>{
       setVisibleOverlay(false)
@@ -1697,7 +1765,7 @@ upsd.current.style.display='none'
         }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
         }
         <div>
-          <p onClick={()=>openPost2(item.username)} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+          <p onClick={()=>openPost2(item.username);closeNav2();} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
           <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
           <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
         </div>
