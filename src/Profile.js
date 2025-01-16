@@ -1001,12 +1001,15 @@ useEffect(() => {
             // console.log('API Response:', response);
             newMessagess = newMessagess2.data
             if (newMessagess) {
+                console.log("ok")
               // console.log('Data exists:', newMessagess);
               // window.location.href = `#${response.data[response.data.length-1].id}`
               
               //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
   
               if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
+                console.log("okno")
+                
                 // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
               
