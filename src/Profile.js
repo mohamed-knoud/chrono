@@ -1650,13 +1650,19 @@ upsd.current.style.display='none'
   };
    useEffect(() => {
       let data;
-      // console.log(11)
+      console.log(11)
       if (resc && username!=="") {
+      console.log(111)
+          
         data = { id_exp: resc.data.response.id, username: username };
           console.log(data)
         if (!loader2 && viss && msg.current) {
+      console.log(1111)
+            
           if(newMessagess && newMessagess.length!==0)
             {
+      console.log(111)
+                
               // console.log(111)
               window.location.href = `#${newMessagess[newMessagess.length-1].id}`
               setLoader2(false);
@@ -1667,6 +1673,8 @@ upsd.current.style.display='none'
         }
         const fetch = async () => {
           try {
+      console.log(111111)
+              
             let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
               headers: {
                 'Content-Type': 'application/json',
