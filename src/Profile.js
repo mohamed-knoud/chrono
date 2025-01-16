@@ -1674,7 +1674,7 @@ upsd.current.style.display='none'
               // window.location.href = `#${response.data[response.data.length-1].id}`
               console.log(80)
               //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-              if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
+              if (Array.isArray(newMessagess)) {
                 // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
               
