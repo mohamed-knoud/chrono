@@ -1457,7 +1457,7 @@ const getUserDataak = async (username) => {
             });
           }
           if (popup23.current && !popup23.current.contains(event.target)) {
-            loader2=true;
+            setLoader2(true)
             setLoader(true)
             popup23.current.style.animation = 'fadeOut 0.2s ease'
             popup23.current.addEventListener('animationend', () => {
