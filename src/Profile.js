@@ -287,6 +287,78 @@ const getUserDataak = async (username) => {
     return res;
    
   };
+    const getUserDataav = async (username) => {
+  
+    const data = { email: localStorage.getItem("email") , input: username }; 
+    try {
+      res = await axios.post('https://soc-net.info/api/getUserData.php', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(res)
+      setFormDataav(prevState => ({
+        ...prevState,
+        older: res.data.response.image
+      }));
+      res.data.followers.map(async (follower)=>{
+        let sa = 0
+        const da = { email: localStorage.getItem("email") ,id:follower.id }; 
+        try {
+          sa = await axios.post('https://soc-net.info/api/checkFollow.php', da, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          // console.log(s.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    // console.log(sa)
+    follower.ok = sa.data
+      })
+
+      res.data.following.map(async (follower)=>{
+        let sad = 0
+        const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
+        try {
+          sad = await axios.post('https://soc-net.info/api/checkFollow.php', dad, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          // console.log(s.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    // console.log(sa)
+    follower.ok = sad.data
+      })
+      
+      // for (let follower in ) {
+          
+      
+      if(res.data.image){
+        setGood4(true)
+        setImage2(false)
+      }
+      
+      setFormDataav(prevState => ({
+        ...prevState,
+        e_mailav: res.data.response.email,
+        firstNameav: res.data.response.first_name,
+        genderav: res.data.response.gender,
+        lastNameav: res.data.response.last_name,
+        usernameav: res.data.response.username,
+        idav:res.data.response.id,
+        imageav:res.data.response.image
+      }));
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    return res;
+   
+  };
      const [file, setFile] = useState(null);
    const [likes, setLikes] = useState([]);
  
@@ -548,6 +620,17 @@ const getUserDataak = async (username) => {
         usernamea:'',
         passworda:'',
         imagea:null
+      });
+
+
+    const [formDataav, setFormDataav] = useState({
+        firstNameav: '',
+        lastNameav:'',
+        genderav:'',
+        e_mailav:'',
+        usernameav:'',
+        passwordav:'',
+        imageav:null
       });
 
       const handleChange1 = (e)=>{
@@ -1956,12 +2039,12 @@ upsd.current.style.display='none'
       {viss && <div ref={po} className='all'>
   <div ref={popup23} style={{overflowY:'hidden',overflowX:'hidden',height:'90vh'}} className="post">
   <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>
-    <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>{formDataa.imagea && (<img 
-            src={`https://soc-net.info/api/${formDataa.imagea}`} 
+    <div style={{display:'flex',justifyContent:'space-around',alignItems:'center'}}>{formDataav.imageav && (<img 
+            src={`https://soc-net.info/api/${formDataav.imageav}`} 
             alt="Preview" 
             // id="image30" 
             style={{marginRight:'10px',objectFit: 'cover',width:'45px',height:'45px',borderRadius:'50%'}}
-          />)}{!formDataa.imagea && <i id="profile31" className="dropbtn fa-solid fa-user"></i>}<span style={{fontSize:'1.3em'}}>{formDataa.firstNamea} {formDataa.lastNamea}(@{formDataa.usernamea})</span>
+          />)}{!formDataav.imageav && <i id="profile31" className="dropbtn fa-solid fa-user"></i>}<span style={{fontSize:'1.3em'}}>{formDataav.firstNameav} {formDataav.lastNameav}(@{formDataav.usernameav})</span>
          </div>
                 <i id="close" style={{fontSize:'1.2em',left:'20px'}} onDoubleClick={closePost2} onClick={closePost2} className="fa-solid fa-x"></i>
 
