@@ -1580,7 +1580,7 @@ upsd.current.style.display='none'
           });
           setNewMessages(newMessagess)
           if(newMessagess.data.length===0){
-            loader2 = false
+            setLoader2(false)
           }
         } catch (error) {
           console.error('Error:', error);
