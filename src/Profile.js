@@ -1391,7 +1391,7 @@ const getUserDataak = async (username) => {
         
         
         if(popup.current && popup.current!==event.target && popup23.current && !popup23.current.contains(event.target))
-          {setLoader2(true)setLoader(true);upsd.current.style.display='none';}
+          {setLoader2(true);setLoader(true);upsd.current.style.display='none';}
         if(popup.current && popup.current!==event.target && popup234.current && !popup234.current.contains(event.target))
           upsd.current.style.display='none'
         if(popup.current && popup.current!==event.target && popup2344.current && !popup2344.current.contains(event.target))
