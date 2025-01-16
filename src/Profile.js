@@ -24,6 +24,8 @@ let rresponses = null
 function Profile() {
     const [flag,setFlag] = useState(false)
   let [username, setUsername] = useState("");
+  let [username2, setUsername2] = useState("");
+    
   const [notig, setNotig] = useState(null);
     let [newMessagess, setNewMessagess] = useState([]);
             const [newMessagefs, setNewMessageffs] = useState(null);
@@ -875,7 +877,7 @@ const getUserDataak = async (username) => {
       setVisibleOverlay(true)
      }
      const openPost2 = (username)=>{
-      setUsername(username)
+      setUsername2(username)
       // console.log(username)
       // loader2 = true
       setLoader2(true); // Correct way to update state in React
@@ -1552,8 +1554,8 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       // console.log(11)
-      if (res && username!=="") {
-        data = { id_exp: res.data.response.id, username: username };
+      if (res && username2!=="") {
+        data = { id_exp: res.data.response.id, username: username2 };
           console.log(data)
         if (!loader2 && viss && msg.current) {
           if(newMessagess && newMessagess.length!==0)
