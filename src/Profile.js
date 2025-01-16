@@ -107,7 +107,7 @@ const getUserDataak = async (username) => {
     const [trigger, setTrigger] = useState(false)
     const [notgpv, setNotgp] = useState(null);
   
-  let username = ''
+  // let username = ''
    const [loader, setLoader] = useState(true);
      const [checkNewComments, setCheckNewComments] = useState([]);
      const [contentt, setContentt] = useState("");
