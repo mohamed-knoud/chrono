@@ -466,7 +466,7 @@ const getUserDataak = async (username) => {
     e.preventDefault()
     let data
 
-    data = { id_exp:resc.data.response.id,id_dest:res.data.response.id,content:content }; 
+    data = { id_exp:resc.data.response.id,id_dest:rs.data.response.id,content:content }; 
     // data = {a:1,b:2}
 
     try {
