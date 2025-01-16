@@ -39,7 +39,7 @@ const getUserDataak = async (username) => {
         'Content-Type': 'application/json',
       },
     });
-    console.log(resp)
+    // console.log(resp)
     // setFormDataa(prevState => ({
     //   ...prevState,
     //   older: res.data.response.image
