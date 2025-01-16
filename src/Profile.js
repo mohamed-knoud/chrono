@@ -931,10 +931,10 @@ useEffect(() => {
 
                 setLoader2(false);  // Correctly update loader state
               } else {
-                console.error('Response data is empty or not an array:', response.data);
+                console.error('Response data is empty or not an array:', newMessagess2.data);
               }
             } else {
-              console.error('API response did not contain expected data:', response);
+              console.error('API response did not contain expected data:', newMessagess2);
             }
           } catch (error) {
             console.error('Error occurred during API call:', error);
