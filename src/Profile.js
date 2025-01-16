@@ -1653,6 +1653,7 @@ upsd.current.style.display='none'
       // console.log(11)
       if (rs && username!=="") {
         data = { id_exp: rs.data.response.id, username: username };
+          console.log(data)
         if (!loader2 && viss && msg.current) {
           if(newMessagess && newMessagess.length!==0)
             {
