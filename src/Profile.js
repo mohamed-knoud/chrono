@@ -342,7 +342,8 @@ const getUserDataak = async (username) => {
         setGood4(true)
         setImage2(false)
       }
-      
+          setResc(fafa)
+
       setFormDataav(prevState => ({
         ...prevState,
         e_mailav: fafa.data.response.email,
@@ -356,7 +357,6 @@ const getUserDataak = async (username) => {
     } catch (error) {
       console.error('Error:', error);
     }
-    setResc(fafa)
     return resc;
   };
      const [file, setFile] = useState(null);
