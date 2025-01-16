@@ -1652,7 +1652,7 @@ upsd.current.style.display='none'
       console.log(11)
       if (username!=="") {
       console.log(111)
-      getUserDataav(username)
+      resc = getUserDataav(username)
           
         data = { id_exp: resc.data.response.id, username: username };
           console.log(data)
