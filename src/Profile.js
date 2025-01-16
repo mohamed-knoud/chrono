@@ -1535,9 +1535,9 @@ upsd.current.style.display='none'
           // console.log(newMessagess)
           if (mutation.type === 'childList') {
             
-            if(newMessagess && newMessagess.data.length!==0)
+            if(newMessagess && newMessagess.length!==0)
               {
-                window.location.href = `#${newMessagess.data[newMessagess.data.length-1].id}`
+                window.location.href = `#${newMessagess.[newMessagess.length-1].id}`
               }
           } else if (mutation.type === 'attributes') {
               console.log('Attributes changed');
@@ -1562,10 +1562,10 @@ upsd.current.style.display='none'
       data = { id_exp:res.data.response.id,id_dest:rs.data.response.id}; 
       checkNewMessages = setInterval(async () => {
         if (loader2 && viss && msg.current) {
-          if(newMessagess && newMessagess.data.length!==0)
+          if(newMessagess && newMessagess.length!==0)
             {
               // console.log(111)
-              window.location.href = `#${newMessagess.data[newMessagess.data.length-1].id}`
+              window.location.href = `#${newMessagess[newMessagess.length-1].id}`
               loader2=false;
             }
         }
@@ -1950,7 +1950,7 @@ upsd.current.style.display='none'
     <form ref={form} style={{height:'90%',overflowX:'hidden',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
       <div ref={msg} style={{overflowX:'hidden',wordWrap:'break-word',position:'relative',zIndex:'1',overflowY:'scroll',height:'100%',width:'100%',display:'flex',flexDirection:'column',alignSelf:'flex-start'}}>
        {loader2 && <div className="loader"></div>}
-      {!loader2 && newMessagess!==null && newMessagess.data.map((item,index) => {
+      {!loader2 && newMessagess!==null && newMessagess.map((item,index) => {
           return (
             rs.data.response.id === item.id_dest ? 
               <div key={index} id={item.id} style={{fontSize:'0.9em',wordWrap:'break-word',alignSelf:'flex-end',width:'60%',color:'white',borderRadius:'5px',margin:'10px 10px',padding:'10px',backgroundColor:'#0c6dfd'}}>
