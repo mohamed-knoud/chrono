@@ -23,7 +23,7 @@ let rresponses = null
 
 function Profile() {
     const [flag,setFlag] = useState(false)
-  const [username, setUsername] = useState("");
+  let [username, setUsername] = useState("");
   const [notig, setNotig] = useState(null);
     let [newMessagess, setNewMessagess] = useState([]);
             const [newMessagefs, setNewMessageffs] = useState(null);
