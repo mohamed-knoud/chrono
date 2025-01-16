@@ -960,12 +960,12 @@ const getUserDataak = async (username) => {
       setVisibleOverlay(true)
      }
      const openPost2 = (username)=>{
+      setViss(true)
       setUsername(username)
       getUserDataav(username)
       // console.log(username)
       // loader2 = true
       setLoader2(true); // Correct way to update state in React
-      setViss(!viss)
       setVisibleOverlay(true)
       if(newMessagess && newMessagess.length!==0){
         window.location.href = `#${newMessagess[newMessagess.length-1].id}`
