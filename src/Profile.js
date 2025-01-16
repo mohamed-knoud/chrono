@@ -1675,6 +1675,7 @@ upsd.current.style.display='none'
   
             // console.log('API Response:', response);
             newMessagess = newMessagess2.data
+            console.log(newMessagess2)
             if (newMessagess) {
               // console.log('Data exists:', newMessagess);
               // window.location.href = `#${response.data[response.data.length-1].id}`
