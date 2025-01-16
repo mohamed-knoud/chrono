@@ -961,6 +961,32 @@ useEffect(() => {
       setFollowing2(!following2)
       setVisibleOverlay(true)
      }
+
+  useEffect(() => {
+    if (!res) return; // Early return if `res` is not available
+
+    const data = { id_exp: res.data.response.id }; 
+    const checkNewMessagess = setInterval(async () => {
+      try {
+        const response = await axios.post('https://soc-net.info/api/checkNewMessages2.php', data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        setNewMessageffs(response.data); // Save the new messages to state
+        // console.log(response.data);
+        if(response.data!==0) // Log the messages to the console
+          setFlag(true)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }, 1000);
+
+    // Cleanup function to clear the interval
+    return () => clearInterval(checkNewMessagess);
+
+  }, [res]); // Run effect again if `res` changes
      const closePost = ()=>{
       // setVis(!vis)
       setVisibleOverlay(false)
