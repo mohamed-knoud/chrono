@@ -12,17 +12,21 @@ let res
 let rs = null
 let newMessagess = null
 // let newMessagess2 = null
-
+let checkNewMessages2 = null
 let loader2 = true 
 // let noImage = 1
 const regex = /^del_[0-9]+/;
-
+let checkNewMessages = null
 let checkNewCommennt
 let checkNewComment = []
 let rresponses = null
 
 function Profile() {
-const [notig, setNotig] = useState(null);
+    const [flag,setFlag] = useState(false)
+  const [username, setUsername] = useState("");
+  const [notig, setNotig] = useState(null);
+    let [newMessagess, setNewMessagess] = useState([]);
+            const [newMessagefs, setNewMessageffs] = useState(null);
 const getUserDataak = async (username) => {
   let resp
   const data = { email: localStorage.getItem("email") , input: username }; 
