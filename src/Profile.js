@@ -1672,7 +1672,7 @@ upsd.current.style.display='none'
             if (newMessagess) {
               // console.log('Data exists:', newMessagess);
               // window.location.href = `#${response.data[response.data.length-1].id}`
-              // console
+              console.log(80)
               //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
               if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
                 // console.log('Before updating state:', newMessagess); // Log before state update
