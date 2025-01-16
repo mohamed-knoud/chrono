@@ -898,7 +898,7 @@ useEffect(() => {
             {
               // console.log(111)
               window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-              loader2=false;
+              setLoader2(false);
             }
         }
         if (msg.current) {
@@ -1549,44 +1549,67 @@ upsd.current.style.display='none'
       subtree: true,
       characterData: true
   };
-    useEffect(() => {
-      // console.log(res,rs,nbr)
-      let data
-      let checkNewMessages = null
-      if(res && rs){
-
-      data = { id_exp:res.data.response.id,id_dest:rs.data.response.id}; 
-      checkNewMessages = setInterval(async () => {
-        if (loader2 && viss && msg.current) {
+   useEffect(() => {
+      let data;
+      // console.log(11)
+      if (res && username!=="") {
+        data = { id_exp: res.data.response.id, username: username };
+        if (!loader2 && viss && msg.current) {
           if(newMessagess && newMessagess.length!==0)
             {
               // console.log(111)
               window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-              loader2=false;
+              setLoader2(false)
             }
         }
         if (msg.current) {
           observer.observe(msg.current, config)
         }
-        try {
-          newMessagess = await axios.post('https://soc-net.info/api/checkNewMessages.php', data, {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          setNewMessages(newMessagess)
-          if(newMessagess.data.length===0){
-            setLoader2(false)
-          }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      }, 1000);
-    }
-      // Cleanup function to clear the interval when the component unmounts or when dependencies change
-      return () => clearInterval(checkNewMessages);
-    }, [username,rs,viss]); // Empty dependency array means this effect runs only once when the component mounts
+        const fetch = async () => {
+          try {
+            let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
   
+            // console.log('API Response:', response);
+            newMessagess = newMessagess2.data
+            if (newMessagess) {
+              // console.log('Data exists:', newMessagess);
+              // window.location.href = `#${response.data[response.data.length-1].id}`
+              
+              //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+  
+              if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
+                // console.log('Before updating state:', newMessagess); // Log before state update
+                setNewMessagess(newMessagess); // Update state properly
+              
+                // console.log('State updated:', newMessagess); // Log after state update
+                // if(!isArrayEmpty(newMessagess))X
+
+                  // window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+
+                setLoader2(false);  // Correctly update loader state
+              } else {
+                console.error('Response data is empty or not an array:', response.data);
+              }
+            } else {
+              console.error('API response did not contain expected data:', response);
+            }
+          } catch (error) {
+            console.error('Error occurred during API call:', error);
+          }
+        };
+  
+        // Set an interval to keep fetching new messages
+        checkNewMessages2 = setInterval(fetch, 1000);
+        return () => {
+          clearInterval(checkNewMessages2); // Cleanup the interval on component unmount or dependency change
+        };
+      }
+    }, [username, viss]);
+    
     useEffect(() => {
       // if(username!=null){
       //   console.log(username)
