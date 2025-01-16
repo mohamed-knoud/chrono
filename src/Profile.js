@@ -1651,7 +1651,7 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       console.log(11)
-      if (resc && username!=="") {
+      if (username!=="") {
       console.log(111)
           
         data = { id_exp: resc.data.response.id, username: username };
