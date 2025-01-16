@@ -960,7 +960,7 @@ const getUserDataak = async (username) => {
       setVisibleOverlay(true)
      }
      const openPost2 = (username)=>{
-      setUsername2(username)
+      setUsername(username)
       getUserDataav(username)
       // console.log(username)
       // loader2 = true
