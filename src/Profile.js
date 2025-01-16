@@ -1677,11 +1677,12 @@ upsd.current.style.display='none'
               if (Array.isArray(newMessagess)) {
                 // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
-              
+                console.log(90)
+        
                 // console.log('State updated:', newMessagess); // Log after state update
                 // if(!isArrayEmpty(newMessagess))X
 
-                  // window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+                  window.location.href = `#${newMessagess[newMessagess.length-1].id}`
 
                 setLoader2(false);  // Correctly update loader state
               } else {
