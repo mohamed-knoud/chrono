@@ -1775,32 +1775,32 @@ upsd.current.style.display='none'
     <h1>Messages</h1>
     {notgpv != null && Array.isArray(notgpv.notifications) && notgpv.notifications.map((item, index) => {
   return (
-    <div key={index} style={{display: 'flex', flexDirection: 'column'}}>
-      <div style={{position:'relative',display: 'flex',alignItems:'center',marginLeft:'20px'}}>
+    <>
+      <div key={index} style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{position:'relative',display: 'flex',alignItems:'center',marginLeft:'20px'}}>
           {item.profile_pic == null ? 
-          <i id="profile11" className="dropbtn fa-solid fa-user"></i> :
-          <img style={{
-            marginLeft: '1px',
-            marginBottom: '6px',
-            maxWidth: '100%',
-            marginRight: '5px',
-            height: '35px',
-            width: '35px',
-            verticalAlign: 'middle',
-            borderRadius: '50%'
-        }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
-        }
-        <div>
-          <p onClick={()=>openPost2(item.username);closeNav2();} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
-          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
-          <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
+            <i id="profile11" className="dropbtn fa-solid fa-user"></i> :
+            <img style={{
+              marginLeft: '1px',
+              marginBottom: '6px',
+              maxWidth: '100%',
+              marginRight: '5px',
+              height: '35px',
+              width: '35px',
+              verticalAlign: 'middle',
+              borderRadius: '50%'
+            }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
+          }
+          <div>
+            <p onClick={() => {openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+            <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
+            <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
+          </div>
+          {item.flag == 1 && <div style={{borderRadius:'50%',backgroundColor:'rgba(0,0,255,0.6)',width:'10px',height:'10px',position:'relative',left:'40px'}}></div>}
         </div>
-        {
-          item.flag == 1 && <div style={{borderRadius:'50%',backgroundColor:'rgba(0,0,255,0.6)',width:'10px',height:'10px',position:'relative',left:'40px'}}></div>
-        }
+        <hr/>
       </div>
-      <hr/>
-    </div>
+    </>
   );
 })}
   </div>
