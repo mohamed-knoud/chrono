@@ -1651,11 +1651,11 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       console.log(11)
-      if (resc && username!=="") {
+      if (rs && username!=="") {
       console.log(111)
       
           
-        data = { id_exp: resc.data.response.id, username: username };
+        data = { id_exp: rs.data.response.id, username: username };
           console.log(data)
         if (!loader2 && viss && msg.current) {
       console.log(1111)
