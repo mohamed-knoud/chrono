@@ -297,7 +297,7 @@ const getUserDataak = async (username) => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(res)
+      console.log(resc)
       setFormDataav(prevState => ({
         ...prevState,
         older: resc.data.response.image
@@ -1642,7 +1642,7 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       // console.log(11)
-      if (res && username2!=="") {
+      if (resc && username2!=="") {
         data = { id_exp: resc.data.response.id, username: username2 };
           console.log(data)
         if (!loader2 && viss && msg.current) {
