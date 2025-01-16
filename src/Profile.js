@@ -961,7 +961,7 @@ const getUserDataak = async (username) => {
      }
      const openPost2 = (username)=>{
       setUsername2(username)
-      getUserDataav(username2)
+      getUserDataav(username)
       // console.log(username)
       // loader2 = true
       setLoader2(true); // Correct way to update state in React
