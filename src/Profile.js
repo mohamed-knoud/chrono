@@ -1154,6 +1154,15 @@ const getUserDataak = async (username) => {
         setStyle1(closed)
         setVisibleOverlay(true)
         document.body.style.overflow = "hidden"
+        try {
+            await axios.get('https://soc-net.info/api/removeFlagTwo.php', {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+        } catch (error) {
+          console.error('Error:', error);
+        }
     }
     const handleUpdate = async () => {
       
