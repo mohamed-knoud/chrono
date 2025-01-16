@@ -1651,7 +1651,7 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       // console.log(11)
-      if (res && username!=="") {
+      if (rs && username!=="") {
         data = { id_exp: rs.data.response.id, username: username };
         if (!loader2 && viss && msg.current) {
           if(newMessagess && newMessagess.length!==0)
@@ -1677,12 +1677,13 @@ upsd.current.style.display='none'
             if (newMessagess) {
               // console.log('Data exists:', newMessagess);
               // window.location.href = `#${response.data[response.data.length-1].id}`
-              
+              console.log(newMessagess)
               //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
   
               if (Array.isArray(newMessagess)) {
                 // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
+                  console.log(newMessagess)
               
                 // console.log('State updated:', newMessagess); // Log after state update
                 // if(!isArrayEmpty(newMessagess))X
