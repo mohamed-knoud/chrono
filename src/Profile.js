@@ -1658,12 +1658,15 @@ upsd.current.style.display='none'
         }
         const fetch = async () => {
           try {
+          console.log(data)
+              
             let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
               headers: {
                 'Content-Type': 'application/json',
               },
             });
               console.log(12)
+              
             // console.log('API Response:', response);
             newMessagess = newMessagess2.data
             if (newMessagess) {
@@ -1671,7 +1674,6 @@ upsd.current.style.display='none'
               // window.location.href = `#${response.data[response.data.length-1].id}`
               // console
               //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-  
               if (Array.isArray(newMessagess) && newMessagess.length !== 0) {
                 // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
