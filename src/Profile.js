@@ -8,7 +8,8 @@ import Comments from './Comments';
 let likesElemeents = null
 let resl = null
 
-let res 
+let res
+let resc
 let rs = null
 let newMessagess = null
 // let newMessagess2 = null
@@ -291,7 +292,7 @@ const getUserDataak = async (username) => {
   
     const data = { email: localStorage.getItem("email") , input: username }; 
     try {
-      res = await axios.post('https://soc-net.info/api/getUserData.php', data, {
+      resc = await axios.post('https://soc-net.info/api/getUserData.php', data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -299,9 +300,9 @@ const getUserDataak = async (username) => {
       console.log(res)
       setFormDataav(prevState => ({
         ...prevState,
-        older: res.data.response.image
+        older: resc.data.response.image
       }));
-      res.data.followers.map(async (follower)=>{
+      resc.data.followers.map(async (follower)=>{
         let sa = 0
         const da = { email: localStorage.getItem("email") ,id:follower.id }; 
         try {
@@ -318,7 +319,7 @@ const getUserDataak = async (username) => {
     follower.ok = sa.data
       })
 
-      res.data.following.map(async (follower)=>{
+      resc.data.following.map(async (follower)=>{
         let sad = 0
         const dad = { email: localStorage.getItem("email") ,id:follower.id }; 
         try {
@@ -338,26 +339,25 @@ const getUserDataak = async (username) => {
       // for (let follower in ) {
           
       
-      if(res.data.image){
+      if(resc.data.image){
         setGood4(true)
         setImage2(false)
       }
       
       setFormDataav(prevState => ({
         ...prevState,
-        e_mailav: res.data.response.email,
-        firstNameav: res.data.response.first_name,
-        genderav: res.data.response.gender,
-        lastNameav: res.data.response.last_name,
-        usernameav: res.data.response.username,
-        idav:res.data.response.id,
-        imageav:res.data.response.image
+        e_mailav: resc.data.response.email,
+        firstNameav: resc.data.response.first_name,
+        genderav: resc.data.response.gender,
+        lastNameav: resc.data.response.last_name,
+        usernameav: resc.data.response.username,
+        idav:resc.data.response.id,
+        imageav:resc.data.response.image
       }));
     } catch (error) {
       console.error('Error:', error);
     }
-    return res;
-   
+    return resc;
   };
      const [file, setFile] = useState(null);
    const [likes, setLikes] = useState([]);
