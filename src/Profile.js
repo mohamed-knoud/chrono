@@ -1642,15 +1642,14 @@ upsd.current.style.display='none'
    useEffect(() => {
       let data;
       // console.log(11)
-      if (res && username2!=="") {
-        data = { id_exp: rs.data.response.id, username: username2 };
-          console.log(data)
+      if (res && username!=="") {
+        data = { id_exp: rs.data.response.id, username: username };
         if (!loader2 && viss && msg.current) {
           if(newMessagess && newMessagess.length!==0)
             {
               // console.log(111)
               window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-              setLoader2(false)
+              setloader2(false);
             }
         }
         if (msg.current) {
@@ -1658,38 +1657,35 @@ upsd.current.style.display='none'
         }
         const fetch = async () => {
           try {
-          console.log(data)
-              
             let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
               headers: {
                 'Content-Type': 'application/json',
               },
             });
-              console.log(12)
-              
+  
             // console.log('API Response:', response);
             newMessagess = newMessagess2.data
             if (newMessagess) {
               // console.log('Data exists:', newMessagess);
               // window.location.href = `#${response.data[response.data.length-1].id}`
-              console.log(80)
+              
               //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+  
               if (Array.isArray(newMessagess)) {
                 // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
-                console.log(90)
-        
+              
                 // console.log('State updated:', newMessagess); // Log after state update
                 // if(!isArrayEmpty(newMessagess))X
 
-                  window.location.href = `#${newMessagess[newMessagess.length-1].id}`
+                  // window.location.href = `#${newMessagess[newMessagess.length-1].id}`
 
                 setLoader2(false);  // Correctly update loader state
               } else {
-                console.error('Response data is empty or not an array:', newMessagess2.data);
+                console.error('Response data is empty or not an array:', response.data);
               }
             } else {
-              console.error('API response did not contain expected data:', newMessagess2);
+              console.error('API response did not contain expected data:', response);
             }
           } catch (error) {
             console.error('Error occurred during API call:', error);
@@ -1702,8 +1698,7 @@ upsd.current.style.display='none'
           clearInterval(checkNewMessages2); // Cleanup the interval on component unmount or dependency change
         };
       }
-    }, [username, viss]);
-    
+    }, [username, viss]); 
     useEffect(() => {
       // if(username!=null){
       //   console.log(username)
