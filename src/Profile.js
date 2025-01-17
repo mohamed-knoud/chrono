@@ -963,7 +963,7 @@ const getUserDataak = async (username) => {
       setVisibleOverlay(true)
      }
      const openPost2 = (username)=>{
-      setUsername(username)
+      setUsername2(username)
       getUserDataav(username)
       // console.log(username)
       // loader2 = true
@@ -1656,10 +1656,10 @@ upsd.current.style.display='none'
   };
    useEffect(() => {
       let data;
-      if (rs && username!=="") {
+      if (rs && username2!=="") {
       
           
-        data = { id_exp: rs.data.response.id, username: username };
+        data = { id_exp: rs.data.response.id, username: username2 };
         if (!loader2 && viss && msg.current) {
             
           if(newMessagess && newMessagess.length!==0)
@@ -1706,7 +1706,7 @@ upsd.current.style.display='none'
           clearInterval(checkNewMessages2); // Cleanup the interval on component unmount or dependency change
         };
       }
-    }, [username, viss,resc]); 
+    }, [username2, viss,resc]); 
     useEffect(() => {
       // if(username!=null){
       //   console.log(username)
