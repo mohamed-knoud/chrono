@@ -1931,7 +1931,7 @@ upsd.current.style.display='none'
             }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
           }
           <div>
-            <p ref={gh} onClick={() => {alert(item.username);openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+            <p ref={gh} onClick={() => {openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
           </div>
@@ -2033,7 +2033,7 @@ upsd.current.style.display='none'
 
           <div style={{position:'relative',display:'flex',flexDirection:'column'}}>{res && res.data.response.blocked2===0 && rs && res.data.response.id!==rs.data.response.id && res.data.response.blocked!==1 && <i onClick={()=>setDrop(!drop)} ref={dr} style={{fontSize:'2em'}} className="fa-solid fa-ellipsis"></i>}
           {drop && <div ref={dro} className="dropdown-contenp">
-                    <div onClick={()=>{alert(res.data.response.username);openPost2(res.data.response.username);setDrop(false);}}><i className="fa-solid fa-message"></i><span>Message</span></div>               
+                    <div onClick={()=>{openPost2(res.data.response.username);setDrop(false);}}><i className="fa-solid fa-message"></i><span>Message</span></div>               
                     <div onClick={()=>block()}><i style={{marginLeft:'4px',display:'inline-block'}} className="fa-solid fa-x"></i><span>Block</span></div>
                 </div>}</div>
           </div>
