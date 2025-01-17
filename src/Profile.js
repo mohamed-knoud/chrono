@@ -1912,7 +1912,7 @@ upsd.current.style.display='none'
             }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
           }
           <div>
-            <p ref={gh} onClick={() => {openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+            <p ref={gh} onClick={() => {openPost2(item.username);getUserDataav(item.username);closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
           </div>
