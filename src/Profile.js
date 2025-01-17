@@ -26,7 +26,6 @@ function Profile() {
   let [username, setUsername] = useState("");
   let [username2, setUsername2] = useState("");
   let [resc,setResc] = useState(null)
-    const 
   const [notig, setNotig] = useState(null);
     let [newMessagess, setNewMessagess] = useState([]);
             const [newMessagefs, setNewMessageffs] = useState(null);
