@@ -1656,21 +1656,15 @@ upsd.current.style.display='none'
   };
    useEffect(() => {
       let data;
-      console.log(11)
       if (rs && username!=="") {
-      console.log(111)
       
           
         data = { id_exp: rs.data.response.id, username: username };
-          console.log(data)
         if (!loader2 && viss && msg.current) {
-      console.log(1111)
             
           if(newMessagess && newMessagess.length!==0)
             {
-      console.log(111)
                 
-              // console.log(111)
               window.location.href = `#${newMessagess[newMessagess.length-1].id}`
               setLoader2(false);
             }
@@ -1680,33 +1674,20 @@ upsd.current.style.display='none'
         }
         const fetch = async () => {
           try {
-      console.log(111111)
+          console.log(data)
               
             let newMessagess2 = await axios.post('https://soc-net.info/api/checkNewMessage3.php', data, {
               headers: {
                 'Content-Type': 'application/json',
               },
             });
-  
-            // console.log('API Response:', response);
-            newMessagess = newMessagess2.data
             console.log(newMessagess2)
+            newMessagess = newMessagess2.data
             if (newMessagess) {
-              // console.log('Data exists:', newMessagess);
-              // window.location.href = `#${response.data[response.data.length-1].id}`
               console.log(newMessagess)
-              //   window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-  
               if (Array.isArray(newMessagess)) {
-                // console.log('Before updating state:', newMessagess); // Log before state update
                 setNewMessagess(newMessagess); // Update state properly
                   console.log(newMessagess)
-              
-                // console.log('State updated:', newMessagess); // Log after state update
-                // if(!isArrayEmpty(newMessagess))X
-
-                  // window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-
                 setLoader2(false);  // Correctly update loader state
               } else {
                 console.error('Response data is empty or not an array:', newMessagess2.data);
