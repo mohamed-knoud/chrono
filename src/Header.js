@@ -2503,7 +2503,7 @@ up.current.style.display='none'
          {!edit && profile && <div style={{textAlign:'center',marginBottom:'20px'}}>
         <h1>Posts</h1>
         {/* {redss!==null && redss.length===0 && } */}
-        <div style={{textAlign:'center',display:'flex',width:'70%',margin:'auto'}}>
+        <div style={{textAlign:'center',display:'flex',flewWrap:'wrap',width:'70%',margin:'auto'}}>
         {redss!==null && redss.length!=0 ? redss.map((item, index) => {
       return (
           <div id={`sen_${item.id_post}`} className="edcctp" key={index}>
