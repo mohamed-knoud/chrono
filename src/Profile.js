@@ -960,16 +960,15 @@ const getUserDataak = async (username) => {
       setVisibleOverlay(true)
      }
      const openPost2 = (username)=>{
-      setViss(true)
       setUsername(username)
       getUserDataav(username)
       // console.log(username)
       // loader2 = true
+      setViss(!viss)
       setLoader2(true); // Correct way to update state in React
       setVisibleOverlay(true)
       if(newMessagess && newMessagess.length!==0){
         window.location.href = `#${newMessagess[newMessagess.length-1].id}`
-// console.log(11)
       }
      }
   const [loader2, setLoader2] = useState(false); // Define loader2 state
@@ -1925,7 +1924,7 @@ upsd.current.style.display='none'
             }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
           }
           <div>
-            <p onClick={() => {openPost2(item.username);getUserDataav(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+            <p onClick={() => {openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
           </div>
