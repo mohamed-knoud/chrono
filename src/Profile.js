@@ -1616,7 +1616,7 @@ upsd.current.style.display='none'
             openNav1()
           }
 
-          if(gh.current.contains(event.target)){
+          if(sidenave2.current.contains(event.target) || gh.current.contains(event.target)){
             openNav2()
           }
         };
