@@ -2308,7 +2308,7 @@ upsd.current.style.display='none'
         <h1>Posts</h1>
         
         {(res && res.data.response.blocked2===0 && res.data.response.blocked!==0) ? <p style={{width:'70%',margin:'auto',padding:'15px',backgroundColor:'rgba(0,0,0,0.2)'}}><i style={{marginRight:'10px',color:'#FFF',borderRadius:'50%',padding:'10px',backgroundColor:'rgba(0,0,0,0.7)'}} className="fa-solid fa-x"></i>You are not allowed to see posts !</p> :
-        <div style={{textAlign:'center',display:'flex',width:'70%',margin:'auto'}}>
+        <div style={{textAlign:'center',display:'flex',flexWrap:'wrap',width:'70%',margin:'auto'}}>
         {redss!==null && redss.length!=0 ? redss.map((item, index) => {
       return (
           <div id={`sen_${item.id_post}`} className="edcctp" key={index}>
