@@ -26,7 +26,7 @@ function Profile() {
   let [username, setUsername] = useState("");
   let [username2, setUsername2] = useState("");
   let [resc,setResc] = useState(null)
-    
+    const 
   const [notig, setNotig] = useState(null);
     let [newMessagess, setNewMessagess] = useState([]);
             const [newMessagefs, setNewMessageffs] = useState(null);
@@ -362,8 +362,11 @@ const getUserDataak = async (username) => {
   };
      const [file, setFile] = useState(null);
    const [likes, setLikes] = useState([]);
- 
+
+    
     const closeBtnSidenave1 = useRef(null);
+    const gh = useRef(null);
+    
     const form = useRef(null);
     const po = useRef(null);
     const openComments = (id_post) => {
@@ -1613,6 +1616,10 @@ upsd.current.style.display='none'
           if(!closeBtnSidenave1.current.contains(event.target) && sidenave1.current.contains(event.target)){
             openNav1()
           }
+
+          if(gh.current.contains(event.target)){
+            openNav2()
+          }
         };
   
       document.addEventListener('mousedown', handleClickOutside);
@@ -1925,7 +1932,7 @@ upsd.current.style.display='none'
             }} src={`https://soc-net.info/api/${item.profile_pic}`} alt="Profile" />
           }
           <div>
-            <p onClick={() => {alert(item.username);openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
+            <p ref={gh} onClick={() => {alert(item.username);openPost2(item.username); closeNav2();}} style={{display:'inline-block',padding:'0',color:'black',fontSize:'1em',fontWeight:'500'}}>{item.name}</p> 
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.9em',fontWeight:'500'}}>{item.content}</p>
             <p style={{color:'rgba(0,0,0,0.5)',fontSize:'0.8em',fontWeight:'500'}}>{item.moment}</p>
           </div>
