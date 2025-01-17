@@ -183,6 +183,7 @@ const getUserDataak = async (username) => {
         const notgp = await axios.post('https://soc-net.info/api/getMessages.php', data, {
           headers: { 'Content-Type': 'application/json' }
         });
+        console.log(notgp.data)
         setNotgp(notgp.data);
       } catch (error) {
         console.error('Error:', error);
