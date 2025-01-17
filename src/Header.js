@@ -1620,15 +1620,15 @@ up.current.style.display='none'
             let rees = await getUserDataa(localStorage.getItem("email"));  
             // console.log(rees)
             let data = {id:rees.data.response.id}; 
-            console.log(data)
             try {
               rresponses = await axios.post('https://soc-net.info/api/retrievePosts.php', data, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
               });
+            console.log(data)
 
-              // console.log(rresponses.data)
+              console.log(rresponses)
               if(rresponses.data.length>0)
                 {
                   rresponses.data.map((item,index)=>{
