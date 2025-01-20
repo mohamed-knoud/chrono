@@ -507,7 +507,7 @@ button.unfollo{
 }
 @media only screen and (max-width: 400px) {
     #lastName{
-        marginLeft:20px;
+        margin-left:20px;
     }
     .dropdown-conten{
         right:5px;
