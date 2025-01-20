@@ -1734,7 +1734,7 @@ up.current.style.display='none'
                 <hr style={{width:'100%',opacity:'0.4'}}/>
 
     
-    <form ref={form} style={{height:'90%',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
+    <form autocomplete="off" ref={form} style={{height:'90%',verticalAlign:'top',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}} onSubmit={addMsg} method="post">
       <div ref={msg} style={{overflowX:'hidden',wordWrap:'break-word',position:'relative',zIndex:'1',overflowY:'scroll',height:'100%',width:'100%',display:'flex',flexDirection:'column',alignSelf:'flex-start'}}>
       {loader2 && <div className="loader"></div>}
       {!loader2 && newMessagess.length > 0 && newMessagess.map((item, index) => {
@@ -1753,7 +1753,7 @@ up.current.style.display='none'
 
       </div>
       <div style={{width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
-        <input value={content} onChange={handleContentChange} placeholder='say something...' type="text" name="say" id="say"/>
+        <input autocomplete="off" value={content} onChange={handleContentChange} placeholder='say something...' type="text" name="say" id="say"/>
         <button className="send" type="submit">Send</button>
         </div>
     </form>
@@ -1763,7 +1763,7 @@ up.current.style.display='none'
         <div><a href=""><span id="logo">soc-net</span></a></div>
         <div id="second">
         <div className="dropdown">
-          <input value={user} onChange={handle} onClick={()=>{search.current.style.display='block'}} type="text" name="user" placeholder='looking for someone...'/>
+          <input autocomplete="off" value={user} onChange={handle} onClick={()=>{search.current.style.display='block'}} type="text" name="user" placeholder='looking for someone...'/>
           <div id="myDropdown" ref={search} className="dropdown-contentt">
           <div style={{textAlign:'right',marginRight:'10px',marginTop:'10px'}}><i onClick={()=>{search.current.style.display='none'}} id="close" className="fa-solid fa-x"></i></div>
           {user=="" && <span style={{display:'inline-block',fontSize:'1.2em',marginBottom:'15px',opacity:'0.6'}}>Enter name or username</span>} 
@@ -1941,20 +1941,20 @@ up.current.style.display='none'
   type="file"
 /><br/>
 
-      <input value={formData.firstName} onChange={handleChange1} placeholder='first name' style={{margin:'15px 10px 0px 20px',height:'50px',width:'45%'}} type="text" name="firstName"/>
+      <input autocomplete="off" value={formData.firstName} onChange={handleChange1} placeholder='first name' style={{margin:'15px 10px 0px 20px',height:'50px',width:'45%'}} type="text" name="firstName"/>
       
-      <input value={formData.lastName} onChange={handleChange2} type="text" placeholder='last name' style={{width:'45%',height:'50px',margin:'15px 0px 0px 0px'}} name="lastName"/>
+      <input autocomplete="off" value={formData.lastName} onChange={handleChange2} type="text" placeholder='last name' style={{width:'45%',height:'50px',margin:'15px 0px 0px 0px'}} name="lastName"/>
       {good1 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(243, 10, 100)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>first name is not given</span>}
       {good2 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(243, 10, 100)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>last name is not given</span>}<br/>
 <div id="dio" style={{margin:'0px 10px 0px 20px',display:'flex',alignItems:'center'}}>
-      <input checked={formData.gender === 'male'} onChange={handleChange6} disabled style={{marginRight:'10px'}} type="radio" id="male" value='male' name="gender"/><label style={{marginRight:'10px'}} htmlFor='male'>Male</label>
-            <input checked={formData.gender === 'female'} onChange={handleChange6} disabled style={{marginRight:'10px'}} type="radio" id="female" value='female' name="gender"/><label htmlFor='female' style={{marginRight:'10px'}}>Female</label>
-            <input checked={formData.gender === 'other'} onChange={handleChange6} disabled type="radio" id="other" value='other' name="gender" style={{marginRight:'10px'}}/><label htmlFor='other' style={{marginRight:'10px'}}>Other</label>
+      <input autocomplete="off" checked={formData.gender === 'male'} onChange={handleChange6} disabled style={{marginRight:'10px'}} type="radio" id="male" value='male' name="gender"/><label style={{marginRight:'10px'}} htmlFor='male'>Male</label>
+            <input autocomplete="off" checked={formData.gender === 'female'} onChange={handleChange6} disabled style={{marginRight:'10px'}} type="radio" id="female" value='female' name="gender"/><label htmlFor='female' style={{marginRight:'10px'}}>Female</label>
+            <input autocomplete="off" checked={formData.gender === 'other'} onChange={handleChange6} disabled type="radio" id="other" value='other' name="gender" style={{marginRight:'10px'}}/><label htmlFor='other' style={{marginRight:'10px'}}>Other</label>
             </div>
-            <input value={formData.e_mail} disabled onChange={handleChange3} placeholder='email' style={{margin:'0px 10px 0px 20px',height:'50px',width:'90%'}} type="email" name="e_mail"/>
-            <input value={formData.username} onChange={handleChange4} placeholder='username' style={{margin:'15px 10px 0px 20px',height:'50px',width:'90%'}} type="text" name="username"/>
+            <input autocomplete="off" value={formData.e_mail} disabled onChange={handleChange3} placeholder='email' style={{margin:'0px 10px 0px 20px',height:'50px',width:'90%'}} type="email" name="e_mail"/>
+            <input autocomplete="off" value={formData.username} onChange={handleChange4} placeholder='username' style={{margin:'15px 10px 0px 20px',height:'50px',width:'90%'}} type="text" name="username"/>
             {good33 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(243, 10, 100)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>username is not given</span>}
-            <input value={formData.password} onChange={handleChange5} placeholder='new password' style={{margin:'15px 10px 0px 20px',height:'50px',width:'90%'}} type="password" name="password"/>
+            <input autocomplete="off" value={formData.password} onChange={handleChange5} placeholder='new password' style={{margin:'15px 10px 0px 20px',height:'50px',width:'90%'}} type="password" name="password"/>
             <a href='#section1'><button onClick={handleUpdate} style={{padding:'7px',fontSize:'1.1em',outine:'none',border:'none',borderRadius:'5px',margin:'20px 10px 0px 20px',color:'white',backgroundColor:'#0b5ed7'}}>Update Profile</button></a>
 </div>}
   {vis && <div className='all'>
@@ -1964,7 +1964,7 @@ up.current.style.display='none'
       <i id="close" onClick={closePost} className="fa-solid fa-x"></i>
     </div>
     <hr style={{marginBottom:'20px',width:'100%',opacity:'0.4'}}/>
-    <form action='' onSubmit={addNewPost} method="post">
+    <form autocomplete="off" action='' onSubmit={addNewPost} method="post">
     {image && (
         <div>
           <img 
@@ -1974,11 +1974,11 @@ up.current.style.display='none'
           />
         </div>
       )}
-      <input accept="image/*" 
+      <input autocomplete="off" accept="image/*" 
         onChange={handleFileChange} id="put" style={{height:'auto',width:'90%',border:'1px solid #ced4da',fontSize:'1.2em',padding:'5px',marginBottom:'10px'}} type="file"/><br/>
       <label htmlFor="say">Say Something</label><br/>
-      <input style={{height:'35px',padding:'5px',width:'100%',marginTop:'10px',marginBottom:'10px'}} type="text" value={content} onChange={handleContentChange} name="say" id="say"/><br/>
-      <input type="submit" value="Post" style={{padding:'10px',color:'white',backgroundColor:'#0b5ed7'}}/>
+      <input autocomplete="off" style={{height:'35px',padding:'5px',width:'100%',marginTop:'10px',marginBottom:'10px'}} type="text" value={content} onChange={handleContentChange} name="say" id="say"/><br/>
+      <input autocomplete="off" type="submit" value="Post" style={{padding:'10px',color:'white',backgroundColor:'#0b5ed7'}}/>
     </form>
   </div>
   </div>}
@@ -2067,7 +2067,7 @@ up.current.style.display='none'
               <div style={{margin:'15px'}}>{item.content}</div>
               <hr style={{opacity:'0.3',width:'100%'}}/>
               <div style={{marginBottom:'10px',width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
-                <input placeholder='say something...' type="text" id={`${index}`} className="sayy"/>
+                <input autocomplete="off" placeholder='say something...' type="text" id={`${index}`} className="sayy"/>
                 <button className={`send_${item.id_post}`} onClick={(e)=>{
                   postCommennt(item.id_post,e.target.previousElementSibling.value,item.id);
                   }} type="submit">Post</button>
@@ -2492,7 +2492,7 @@ up.current.style.display='none'
                     </div>
                     <hr style={{opacity:'0.5',width:'100%'}}/>
                     <div style={{marginBottom:'10px',width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
-                        <input placeholder='say something...' type="text" className="sayy"/>
+                        <input autocomplete="off" placeholder='say something...' type="text" className="sayy"/>
                       <button onClick={(e)=>{postComment(item.id_post,e.target.previousElementSibling.value,item.id);e.target.previousElementSibling.value="";}} className={`send_${item.id_post}`} type="submit">Post</button>
                     </div>
                   </div>
