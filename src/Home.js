@@ -71,17 +71,17 @@ function Home() {
   };
   return (
     <div id="evr">
-        <form id="from" action='' method="POST" onSubmit={handleSubmit}>
+        <form id="from" action='' autocomplete="off" method="POST" onSubmit={handleSubmit}>
             <div style={{margin:'15px 15px 0 15px',textAlign:'center'}}>
                 <span id='log'>soc-net</span>
             </div>
             <label style={{margin:'10px 20px',fontSize:'1.2em',fontWeight:'400'}}>Please sign in</label><br/>
-            <input onChange={handleChange1} value={formData.username} style={{width:'90%',margin:'10px 20px'}} type="text" placeholder='username/email' name='username'/><br/>
+            <input autocomplete="off" onChange={handleChange1} value={formData.username} style={{width:'90%',margin:'10px 20px'}} type="text" placeholder='username/email' name='username'/><br/>
             {good && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(177, 7, 72)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>username/email is not given</span>}
-            <input onChange={handleChange2} value={formData.password} style={{width:'90%',margin:'10px 20px'}} type="password" placeholder='password' name='password'/>
+            <input autocomplete="off" onChange={handleChange2} value={formData.password} style={{width:'90%',margin:'10px 20px'}} type="password" placeholder='password' name='password'/>
             {good2 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(177, 7, 72)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>password is not given</span>}
             {gaga && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(177, 7, 72)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>something is incorrect, we can't find you</span>}
-            <div style={{margin:'10px 20px',display:'flex',alignItems:'center',justifyContent:'space-between'}}><input style={{padding:'5px 10px',backgroundColor:'#0b5ed7',color:'white',borderRadius:'5px'}} type="submit" value="Sign in" name="sign"/><Link style={{textDecoration:'none'}} to='/signup'>Create New Account</Link></div>
+            <div style={{margin:'10px 20px',display:'flex',alignItems:'center',justifyContent:'space-between'}}><input autocomplete="off" style={{padding:'5px 10px',backgroundColor:'#0b5ed7',color:'white',borderRadius:'5px'}} type="submit" value="Sign in" name="sign"/><Link style={{textDecoration:'none'}} to='/signup'>Create New Account</Link></div>
             <Link to='/forgot' style={{margin:'10px 20px'}}>Forgot password?</Link>
         </form>
     </div>
