@@ -400,7 +400,7 @@ const getUserDataak = async (username) => {
           console.error('Error:', error);
         }
       }, 1000);
-      setVisibleOverlay(true)
+      // setVisibleOverlay(true)
 
     }
     const addNewPost = async (e)=>{
@@ -2375,7 +2375,7 @@ upsd.current.style.display='none'
        <Comments trigger={trigger} checkNewComments={checkNewComments} />
 
                     </div>
-                    <hr style={{opacity:'0.5',width:'100%'}}/>
+                    <hr style={{margin:'-3px auto';opacity:'0.5',width:'100%'}}/>
                     <div style={{marginBottom:'10px',width:'100%',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
                         <input autocomplete="off" placeholder='say something...' type="text" className="sayy"/>
                       <button onClick={(e)=>{postComment(item.id_post,e.target.previousElementSibling.value,item.id);e.target.previousElementSibling.value="";}} className={`send_${item.id_post}`} type="submit">Post</button>
