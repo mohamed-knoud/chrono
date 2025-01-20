@@ -1943,7 +1943,7 @@ up.current.style.display='none'
 
       <input autocomplete="off" value={formData.firstName} onChange={handleChange1} placeholder='first name' style={{margin:'15px 10px 0px 20px',height:'50px',width:'45%'}} type="text" name="firstName"/>
       
-      <input autocomplete="off" value={formData.lastName} onChange={handleChange2} type="text" placeholder='last name' style={{width:'45%',height:'50px',margin:'15px 0px 0px 0px'}} name="lastName"/>
+      <input autocomplete="off" value={formData.lastName} onChange={handleChange2} type="text" placeholder='last name' style={{width:'45%',height:'50px',margin:'15px 0px 0px 0px'}} id="lastName" name="lastName"/>
       {good1 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(243, 10, 100)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>first name is not given</span>}
       {good2 && <span style={{margin:'10px 20px',display:'inline-block',color:'rgb(243, 10, 100)',border:'1px solid rgb(203, 184, 190)',padding:'15px 10px',backgroundColor:'#f8d7da',width:'90%'}}>last name is not given</span>}<br/>
 <div id="dio" style={{margin:'0px 10px 0px 20px',display:'flex',alignItems:'center'}}>
