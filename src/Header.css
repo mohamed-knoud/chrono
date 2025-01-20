@@ -505,9 +505,14 @@ button.unfollo{
   background-color:white;
   padding:10px;
 }
+#lastName,#firstName{
+    margin:15px 10px 0px 20px;
+    height:50px;
+    width:45%;
+}
 @media only screen and (max-width: 400px) {
-    #lastName{
-        margin:15px 0px 0px 20px;
+    #lastName,#firstName{
+        width:90%;
     }
     .dropdown-conten{
         right:5px;
