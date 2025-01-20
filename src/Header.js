@@ -2058,7 +2058,7 @@ up.current.style.display='none'
               <div style={{margin:'15px'}}>
       {/* setVisibleOverlay(true) */}
                 <span id={item.id_post} className='slikes' onClick={(event)=>{
-                  setVisibleOverlay(!visibleOverlay);
+                  // setVisibleOverlay(!visibleOverlay);
                   if(document.querySelector(`.all.box_${event.target.id}`).style.display=='none'){
                     document.querySelector(`.all.box_${event.target.id}`).style.display='flex';
                   }
