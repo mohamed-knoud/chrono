@@ -525,7 +525,7 @@ overflow-y: scroll;
     width:100%;
     height:100%;
     background-color:white;
-    padding:10px;
+    padding:10px 10px 5px;
   }
   .postg{
     width:95%;
